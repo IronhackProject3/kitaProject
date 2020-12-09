@@ -50,9 +50,9 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.locals.title = 'Express - Generated with IronGenerator';
 
 
-
-const index = require('./routes/index');
-app.use('/', index);
+// commented lines below as we have now a "kitas" route and we deleted "index"
+// const index = require('./routes/index');
+// app.use('/', index);
 
 
 module.exports = app;
