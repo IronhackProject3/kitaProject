@@ -1,10 +1,12 @@
 const express = require ('express');
 const router = express.Router();
+const Kita = require('../models/Kita');
 
 // get all kitas
 router.get('/', (req, res) => {
   Kita.find()
     .then(kitas => {
+      // console.log('kitas', kitas);
       res.status(200).json(kitas);
     })
     .catch(err => {
@@ -13,17 +15,3 @@ router.get('/', (req, res) => {
 });
 
 module.exports = router;
-
-// create a kita
-// router.post('/', (req, res) => {
-//   const { add keys } = req.body;
-//   Kita.create({
-//     key,
-//     key2,
-//     key3
-//   })
-//   .then(kita => {
-//     res.status(201).json(kita);
-//   })
-//   .catch(err =>)
-// })
