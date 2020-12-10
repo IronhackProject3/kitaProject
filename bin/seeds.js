@@ -22,4 +22,4 @@ const kitas = [{ kitaName : 'Kita Cheburashka Prenzlauer Berg', Address : 'Bernh
 
 kitas.forEach(kita => {  
   Kita.create(kita);
-});
+}); 
