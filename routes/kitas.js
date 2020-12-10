@@ -14,4 +14,22 @@ router.get('/', (req, res) => {
     })
 });
 
+// get a specfic kita
+router.get('/:id', (req, res, next) => {
+  console.log('kitaaaa');
+  Kita.findById(req.params.id)
+    .then(kita => {
+      console.log('kita', kita);
+      if (!kita) {
+        console.log('no kita found');
+        res.status(404).json(kita);
+      } else {
+        res.status(200).json(kita);
+      }
+    })
+    .catch(err => {
+      res.json(err);
+    })
+});
+
 module.exports = router;
