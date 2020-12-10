@@ -28,7 +28,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar setUser={this.setUser} />
+        <Navbar setUser={this.setUser} user={this.state.user} />
         <Switch>
           <Route exact path="/" component={Kitas} />
           <Route exact path="/kitas/:id" component={KitaDetails} />
