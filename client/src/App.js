@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from "react-router-dom";
 import './App.css';
-import Kitas from "./components/Kitas";
+import Kitas from "./components/kita/Kitas";
 
 function App() {
   return (
