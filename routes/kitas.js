@@ -57,7 +57,7 @@ router.post('/', (req, res) => {
     closeTime,
     minAge,
     maxAge,
-    //owner
+    //owner userId
   })
     .then(kita => {
       User.findByIdAndUpdate(
