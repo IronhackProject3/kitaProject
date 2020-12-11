@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+
 export default class Kitas extends Component {
 
 state = {
@@ -30,11 +31,12 @@ state = {
 
     <div>
       <h1>List of Kitas</h1>
+      <Link to={`KitaAdd/`}> Add your Kita </Link>
         {this.state.kitas.map(kita => {
           return (
             <div key={kita._id}>
               <p>
-                <Link to={`/kitas/${kita._id}`}>{kita.kitaName}</Link>
+              <Link to={`/kitas/${kita._id}`}>{kita.kitaName}</Link>,  {kita.Address}
               </p>
             </div>
           )
@@ -43,3 +45,4 @@ state = {
     )
   }
 }
+
