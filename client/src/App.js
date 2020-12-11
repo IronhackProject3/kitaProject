@@ -3,6 +3,8 @@ import './App.css';
 import Navbar from "./components/Navbar";
 import Kitas from "./components/kitas/Kitas";
 import KitaDetails from "./components/kitas/KitaDetails";
+import ApplySignUp from "./components/kitas/ApplySignUp";
+import NewKita from "./components/kitas/KitaAdd";
 import { Route, Switch } from "react-router-dom";
 
 const NotFound = () => {
@@ -16,6 +18,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Kitas} />
         <Route exact path="/kitas/:id" component={KitaDetails} />
+        <Route exact path="/kitas/:id/signup" component={ApplySignUp} />
+        <Route exact path="/KitaAdd" component={NewKita} />
         <Route component={NotFound} />
       </Switch>
     </div>

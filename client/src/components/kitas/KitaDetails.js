@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 export default class KitaDetails extends Component {
 
@@ -38,11 +40,14 @@ export default class KitaDetails extends Component {
       <div>
         {this.state.kita && (
           <>
-            <h1>{this.state.kita.kitaName}</h1>
+            <h1>Kita details {this.state.kita.kitaName}</h1>
             <p><strong>Address: </strong>{this.state.kita.Address}</p>
             <p><strong>Postcode: </strong>{this.state.kita.Postcode}</p>
             <p><strong>Telephone: </strong>{this.state.kita.Telephone}</p>
-            <p><strong>Email: </strong>{this.state.kita.emailAddress}</p>
+            <p><strong>Email: </strong><a href={"mailto:" + this.state.kita.emailAddress}> {this.state.kita.emailAddress}</a></p>
+            
+            <Link to={`/kitas/${this.state.kita._id}/signup`}> Apply to {this.state.kita.kitaName}</Link> 
+
           </>
         )}
       </div>
