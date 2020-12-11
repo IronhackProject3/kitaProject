@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Kitas from "./components/kitas/Kitas";
 import KitaDetails from "./components/kitas/KitaDetails";
 import ApplySignUp from "./components/kitas/ApplySignUp";
-import NewKita from "./components/kitas/KitaAdd";
+import NewKita from "./components/parents/ApplyToKita";
 import { Route, Switch } from "react-router-dom";
 import Signup from './components/auth/Signup';
 
@@ -34,8 +34,9 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={Kitas} />
           <Route exact path="/kitas/:id" component={KitaDetails} />
+          <Route exact path="/kitas/:id/signup" component={NewKita} />
           <Route exact path="/signup" render={props => <Signup setUser={this.setUser} {...props} />} />
-          <Route exact path="/KitaAdd" component={NewKita} />
+          <Route exact path="/KitaAdd" component={ApplySignUp} />
           <Route component={this.NotFound} />
         </Switch>
       </div>

@@ -41,6 +41,44 @@ router.get('/:id', (req, res) => {
 // add a kita
 router.post('/', (req, res) => {
   const { kitaName, Address, Postcode, Telephone, emailAddress, freePlaces, mapLink, languages, totalPlaces, theme, openTime, closeTime, minAge, maxAge } = req.body;
+  // const { childFName, childSName, dob, Parent1FName } = req.body;
+  const owner = req.user._id;
+  Kita.create({
+    kitaName,
+    Address,
+    Postcode,
+    Telephone,
+    emailAddress,
+    freePlaces,
+    mapLink,
+    languages,
+    totalPlaces,
+    theme,
+    openTime,
+    closeTime,
+    minAge,
+    maxAge,
+    //owner userId
+  })
+    .then(kita => {
+      User.findByIdAndUpdate(
+        owner,
+        { 
+          kita: kita._id
+         },
+        // this ensures that we are getting the updated document as a return 
+        { new: true }
+      )
+      res.status(201).json(kita);
+    })
+    .catch(err => {
+      res.json(err);
+    })
+})
+
+// add parents
+router.post('/', (req, res) => {
+  const { childFName, childSName, dob, Parent1FName } = req.body;
   const owner = req.user._id;
   Kita.create({
     kitaName,
