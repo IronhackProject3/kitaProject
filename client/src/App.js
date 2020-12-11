@@ -3,10 +3,11 @@ import './App.css';
 import Navbar from "./components/Navbar";
 import Kitas from "./components/kitas/Kitas";
 import KitaDetails from "./components/kitas/KitaDetails";
-import ApplySignUp from "./components/kitas/ApplySignUp";
-import NewKita from "./components/kitas/KitaAdd";
+import AddKita from "./components/kitas/AddKita";
+import NewKita from "./components/parents/ApplyToKita";
 import { Route, Switch } from "react-router-dom";
 import Signup from './components/auth/Signup';
+import { Container } from "react-bootstrap";
 
 
 
@@ -29,16 +30,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <Container fluid>
         <Navbar setUser={this.setUser} user={this.state.user} />
         <Switch>
           <Route exact path="/" component={Kitas} />
+          <Route exact path="/kitas/:id/signup" component={NewKita} />
           <Route exact path="/kitas/:id" component={KitaDetails} />
           <Route exact path="/signup" render={props => <Signup setUser={this.setUser} {...props} />} />
-          <Route exact path="/KitaAdd" component={NewKita} />
+          <Route exact path="/AddKita" component={AddKita} />
           <Route component={this.NotFound} />
         </Switch>
-      </div>
+      </Container>
     );
   }
 

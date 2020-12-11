@@ -68,10 +68,10 @@ export default class Signup extends Component {
           <Form.Group controlId="type">
             <Form.Label>User type: </Form.Label>
             <Form.Control 
-            as="select" 
-            custom
-            name='type'
-            onChange={this.handleChange}
+              as="select" 
+              custom
+              name='type'
+              onChange={this.handleChange}
             >
               <option value="parent">Parent</option>
               <option value="kita">Kita administrator</option>

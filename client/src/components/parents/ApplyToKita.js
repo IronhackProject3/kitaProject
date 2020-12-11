@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import {Form, Button} from 'react-bootstrap'
-export default class KitaDetails extends Component {
+
+export default class ApplyToKita extends Component {
 
   state = {
     kita: null
@@ -44,70 +45,62 @@ export default class KitaDetails extends Component {
         {this.state.kita && (
           <>
 
-Add your Kita
+Apply to   {this.state.kita.kitaName}
 
 
 <Form onSubmit={this.handleSubmit} >
-<Form.Group controlId="kitaName">
-    <Form.Control type="text" placeholder="Kita Name" />
+<Form.Group controlId="childFName">
+    {/* <Form.Label>Child's First Name</Form.Label> */}
+    <Form.Control type="text" placeholder="Child's First Name" />
     <Form.Text className="text-muted">
     </Form.Text>
   </Form.Group>
 
 
-  <Form.Group controlId="kitaAddress">
-    <Form.Control type="text" placeholder="Address of Kita" />
+  <Form.Group controlId="childSName">
+    {/* <Form.Label>Child's First Name</Form.Label> */}
+    <Form.Control type="text" placeholder="Child's Last Name" />
     <Form.Text className="text-muted">
     </Form.Text>
   </Form.Group>
 
-<Form.Group controlId="kitaTelephone">
-  {/* <Form.Label>Child's First Name</Form.Label> */}
-  <Form.Control type="text" placeholder="Phone number" />
+
+    <Form.Group controlId="dob">
+      <Form.Label>Date of Birth</Form.Label>
+      <Form.Control type="date" name="dob" placeholder="Date of Birth" />
+    </Form.Group>
+
+
+
+
+    <Form.Group >
+      <Form.Label as="legend" column sm={2}>
+      </Form.Label>
+        <Form.Check
+          type="radio"
+          label="Girl"
+          name="girl"
+          id="girl"
+        />
+        <Form.Check
+          type="radio"
+          label="Boy"
+          name="boy"
+          id="boy"
+        />
+    </Form.Group>
+
+
+
+
+
+
+<Form.Group controlId="Parent1FName">
+  <Form.Label>First Parent / Guardian </Form.Label>
+  <Form.Control type="text" placeholder="First Name" />
   <Form.Text className="text-muted">
   </Form.Text>
 </Form.Group>
-
-<Form.Group controlId="kitaEmail">
-  {/* <Form.Label>Second Parent / Guardian</Form.Label> */}
-  <Form.Control type="email" placeholder="Email Address of Kita Administrator" />
-  <Form.Text className="text-muted">
-  </Form.Text>
-</Form.Group>
-
-<Form.Group controlId="exampleForm.ControlSelect2">
-    <Form.Label>Languages(s) used in Kita</Form.Label>
-    <Form.Control as="select" multiple>
-      <option>German</option>
-      <option>English</option>
-      <option>Turkish</option>
-      <option>Russian</option>
-      <option>Spanish</option>
-      <option>French</option>
-      <option>Arabic</option>
-      <option>Polish</option>
-      <option>Italian</option>
-      <option>Kurdish</option>
-      <option>Greek</option>
-      <option>Polish</option>
-      <option>Portugese</option>
-      <option>Sign Language</option>
-      <option>Dutch</option>
-      <option>Other</option>
-    </Form.Control>
-  </Form.Group>
-
-<Form.Group controlId="kitaPlaces">
-  <Form.Control type="text" placeholder="Total number of places in Kita" />
-  <Form.Text className="text-muted">
-  </Form.Text>
-</Form.Group>
-
-
-
-
-
-
 
 
 <Form.Group controlId="Parent1SName">
@@ -117,6 +110,21 @@ Add your Kita
   </Form.Text>
 </Form.Group>
 
+
+<Form.Group controlId="Parent1Phone">
+  {/* <Form.Label>Child's First Name</Form.Label> */}
+  <Form.Control type="text" placeholder="Phone number" />
+  <Form.Text className="text-muted">
+  </Form.Text>
+</Form.Group>
+
+
+<Form.Group controlId="Parent1Email">
+  {/* <Form.Label>Second Parent / Guardian</Form.Label> */}
+  <Form.Control type="text" placeholder="Email Address" />
+  <Form.Text className="text-muted">
+  </Form.Text>
+</Form.Group>
 
 
 <Form.Group controlId="Parent2FName">
@@ -149,6 +157,30 @@ Add your Kita
   <Form.Text className="text-muted">
   </Form.Text>
 </Form.Group>
+
+
+<Form.Group controlId="exampleForm.ControlSelect2">
+    <Form.Label>Home languages(s)</Form.Label>
+    <Form.Control as="select" multiple>
+      <option>German</option>
+      <option>English</option>
+      <option>Turkish</option>
+      <option>Russian</option>
+      <option>Spanish</option>
+      <option>French</option>
+      <option>Arabic</option>
+      <option>Polish</option>
+      <option>Italian</option>
+      <option>Kurdish</option>
+      <option>Greek</option>
+      <option>Polish</option>
+      <option>Portugese</option>
+      <option>Sign Language</option>
+      <option>Dutch</option>
+      <option>Other</option>
+    </Form.Control>
+  </Form.Group>
+
   <Form.Group controlId="specialNeeds">
     <Form.Check type="checkbox" label="Child has special needs" />
   </Form.Group>
