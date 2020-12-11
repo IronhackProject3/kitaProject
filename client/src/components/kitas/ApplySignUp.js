@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import {Form, Button} from 'react-bootstrap'
-export default class KitaDetails extends Component {
+export default class ApplySignUp extends Component {
 
   state = {
     kita: null

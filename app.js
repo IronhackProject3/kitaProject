@@ -81,6 +81,9 @@ app.locals.title = 'Express - Generated with IronGenerator';
 const kitas = require('./routes/kitas');
 app.use('/api/kitas', kitas);
 
+const parents = require('./routes/parents');
+app.use('/api/parents', parents);
+
 const auth = require('./routes/auth');
 app.use('/api/auth', auth);
 

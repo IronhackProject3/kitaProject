@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import {Form, Button} from 'react-bootstrap'
-export default class KitaDetails extends Component {
+// const Parent = require('../.././.././.././models/Parent');
+export default class ApplyToKita extends Component {
 
   state = {
-    kita: null
+    childFName: '',
+    childSName: '',
+    dob: '',
+    Parent1FName: ''
   }
 
   getData = () => {
@@ -34,7 +38,18 @@ export default class KitaDetails extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    //axios.post here
+    console.log(this.state.childFName)
+    axios.post('/api/parents', {
+      childFName: this.state.childFName,
+    })
+    .then(()=>{
+      // this.setState({childFName: ''})
+
+
+    })
+    .catch (error => console.log(error));
+    
+
   }
 
   render() {
@@ -55,7 +70,6 @@ Apply to   {this.state.kita.kitaName}
     </Form.Text>
   </Form.Group>
 
-
   <Form.Group controlId="childSName">
     {/* <Form.Label>Child's First Name</Form.Label> */}
     <Form.Control type="text" placeholder="Child's Last Name" />
@@ -68,9 +82,6 @@ Apply to   {this.state.kita.kitaName}
       <Form.Label>Date of Birth</Form.Label>
       <Form.Control type="date" name="dob" placeholder="Date of Birth" />
     </Form.Group>
-
-
-
 
     <Form.Group >
       <Form.Label as="legend" column sm={2}>
@@ -193,7 +204,7 @@ Apply to   {this.state.kita.kitaName}
 
 
   <Button variant="primary" type="submit">
-    Submit
+    Submit your application to {this.state.kita.kitaName}
   </Button>
 </Form>
 
