@@ -7,7 +7,7 @@ export default class Signup extends Component {
   state = {
     username: '',
     password: '',
-    type: '',
+    type: 'parent',
     message: ''
   }
 
@@ -21,7 +21,7 @@ export default class Signup extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { username, password, type } = this.state;
-    console.log(this.state)
+    console.log("state log on login", this.state)
     signup(username, password, type)
       .then(data => {
         if (data.message) {
@@ -73,6 +73,7 @@ export default class Signup extends Component {
               custom
               name='type'
               onChange={this.handleChange}
+              value={this.state.type}
             >
               <option value="parent">Parent</option>
               <option value="kita">Kita administrator</option>

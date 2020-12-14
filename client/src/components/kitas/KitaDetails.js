@@ -33,8 +33,15 @@ export default class KitaDetails extends Component {
   componentDidMount = () => {
     this.getData();
   }
-  
 
+  componentDidUpdate(prevProps, prevState){
+    // console.log("prevprops", prevProps, "prevstate", prevState);
+    // console.log("props", this.props);
+    if(prevProps.match.params.id !== this.props.match.params.id) {
+      this.getData();
+    }
+  }
+  
   render() {
     
     return (

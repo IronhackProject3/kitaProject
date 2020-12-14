@@ -5,7 +5,7 @@ const userSchema = new Schema({
   password: String,
   type: String,  // kita admin or parent
   kita: {type: Schema.Types.ObjectId, ref: 'Kita'}, //Kita here means 
-  //parent: {type: Schema.Types.ObjectId, ref: 'Parent'}
+  parent: {type: Schema.Types.ObjectId, ref: 'Parent'}
 });
 
 

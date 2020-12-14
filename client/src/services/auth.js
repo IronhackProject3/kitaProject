@@ -10,6 +10,7 @@ const signup = (username, password, type) => {
       return err.response.data;
     });
 }
+
 const newParent = (    childFName,
   childSName,
   dob,

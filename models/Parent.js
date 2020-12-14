@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
+
 const parentSchema = new Schema({
   childFName: String,
   childSName: String,

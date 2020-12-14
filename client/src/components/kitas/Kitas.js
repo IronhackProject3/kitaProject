@@ -43,10 +43,10 @@ export default class Kitas extends Component {
     });
     
     
-      console.log("filtered kitas", kitas);
+      // console.log("filtered kitas", kitas);
 
     return (
-      <div>
+      <>
         <Form>
           <Form.Group controlId="SearchKita">
             <Form.Control 
@@ -61,9 +61,9 @@ export default class Kitas extends Component {
 
         <h4>Kitas</h4>
 
-        <Button variant="primary">
+        {/* <Button variant="primary">
           <Link to="AddKita/"> Add your Kita </Link>
-        </Button>
+        </Button> */}
           
           {kitas.map(kita => (
               <div key={kita._id}>
@@ -73,7 +73,7 @@ export default class Kitas extends Component {
               </div>
             )
           )}
-      </div>
+      </>
     )
   }
 }

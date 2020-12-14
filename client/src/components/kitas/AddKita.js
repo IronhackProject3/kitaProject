@@ -37,6 +37,7 @@ export default class AddKita extends Component {
     axios.post('/api/kitas/addKita',this.state)
     .then(response => {
       console.log(response);
+      this.props.setUserKita(response.data._id);
       this.props.history.push(`/kitas/${response.data._id}`);
     })
   }
@@ -59,34 +60,6 @@ export default class AddKita extends Component {
     Other: 'other'
 
   }
-
-  // getData = () => {
-  //   const id = this.props.match.params.id;
-  //   // console.log("KitaID is", id)
-  //   axios.get(`/api/kitas/${id}`)
-  //     .then(response => {
-  //       console.log("response from details", response);
-  //       this.setState({
-  //         kita: response.data,
-  //       })
-  //     })
-  //     .catch(err => {
-  //       console.log(err.response)
-  //       if (err.response.status === 404) {
-  //         this.setState({
-  //           error: 'Sorry - Kita Not found 🤷‍♀️ 🤷‍♂️'
-  //         })
-  //       }
-  //     }
-  //   )
-  // }
-
-  // componentDidMount = () => {
-  //   this.getData();
-  // }
-  
-
-
 
   render() {
     

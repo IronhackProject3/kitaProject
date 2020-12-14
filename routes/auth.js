@@ -15,7 +15,7 @@ router.post('/signup', (req, res, next) => {
   }
   
   // check if username exists in database -> show message
-  User.findOne({ username: username })
+  User.findOne({ username: username }).populate('kita')
     .then(found => {
       if (found !== null) {
         return res.status(400).json({ message: 'Your username is already taken' });

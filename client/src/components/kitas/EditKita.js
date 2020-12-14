@@ -87,7 +87,6 @@ export default class EditKita extends Component {
     Dutch: 'nl',
     SignLanguage: 'Sign Language',
     Other: 'other'
-
   }
   
   
@@ -182,10 +181,10 @@ export default class EditKita extends Component {
                 name='languages'
                 onChange={this.handleChange}
                 required
-                //defaultValue={this.state.languages}
+                value={this.state.languages}
               >
                 {Object.keys(this.allLanguages).map( lang => (
-                  <option key={lang} value={this.allLanguages[lang]} selected={this.state.languages.includes(this.allLanguages[lang])}>{lang}</option>
+                  <option key={lang} value={this.allLanguages[lang]}>{lang}</option>
                 ))}
               </Form.Control>
           </Form.Group>

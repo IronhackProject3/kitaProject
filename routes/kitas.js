@@ -62,7 +62,7 @@ router.post('/addKita', (req, res) => {
 
   })
     .then(kita => {
-      console.log(kita);
+      console.log('new kita', kita);
       User.findByIdAndUpdate(
         owner,
         {
