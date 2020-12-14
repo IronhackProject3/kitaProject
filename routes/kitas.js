@@ -44,6 +44,7 @@ router.post('/addKita', (req, res) => {
   // const { childFName, childSName, dob, Parent1FName } = req.body;
   const owner = req.user._id;
   Kita.create({
+
     languages: languages,
     kitaName: kitaName,
     Address: address,
@@ -58,6 +59,7 @@ router.post('/addKita', (req, res) => {
     closeTime: closeTime,
     minAge: minAge,
     maxAge: maxAge,
+
   })
     .then(kita => {
       console.log(kita);
