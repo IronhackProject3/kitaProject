@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import {Form, Button} from 'react-bootstrap'
-import { newParent } from './addApplication';
 
 // const Parent = require('../.././.././.././models/Parent');
 export default class ApplyToKita extends Component {
@@ -24,32 +23,41 @@ export default class ApplyToKita extends Component {
     specialNeedsDetails: ''
   }
 
-  
-  getData = () => {
-    const id = this.props.match.params.id;
-    console.log("KitaID is", id)
-    axios.get(`/api/kitas/${id}`)
-    .then(response => {
-      console.log("response from details", response);
-      this.setState({
-        kita: response.data,
-      })
-    })
-    .catch(err => {
-      console.log(err.response)
-      if (err.response.status === 404) {
-        this.setState({
-          error: 'Sorry - Kita Not found 🤷‍♀️ 🤷‍♂️'
-        })
-      }
-    })
-  }
-  
+
   componentDidMount = () => {
-    this.getData();
+    const id = this.props.match.params.id;
+    axios.get(`/api/parents/${id}`)
+      .then(response => {
+        console.log("response from details", response);
+        this.setState({
+          childFName: response.data.childFName,
+          childSName: response.data.childSName,
+          dob: response.data.dob,
+          boyGirl: response.data.boyGirl,
+          Parent1FName: response.data.Parent1FName,
+          Parent1SName: response.data.Parent1SName,
+          Parent1Phone: response.data.Parent1Phone,
+          Parent2FName: response.data.Parent2FName,
+          Parent2SName: response.data.Parent2SName,
+          Parent2Phone: response.data.Parent2Phone,
+          Parent2Email: response.data.Parent2Email,
+          homeLanguage: response.data.homeLanguage,
+          specialNeeds: response.data.specialNeeds,
+          specialNeedsDetails: response.data.specialNeedsDetails,
+        })
+      })
+      .catch(err => {
+        console.log(err.response)
+        if (err.response.status === 404) {
+          this.setState({
+            error: 'Sorry - Application Not found'
+          })
+        }
+      })
   }
   
-    
+
+
   handleChange = (event) => {
     const {name, value} = event.target
     this.setState ({[name]: name === 'homeLanguage'
@@ -86,16 +94,9 @@ export default class ApplyToKita extends Component {
     Other: 'other'
     
   }
-  
-  
-  
-  // onValueChange(value) {
-  //   this.setState({
-  //     boyGirl: value
-  //   });
-  // }
-  
-  
+
+
+
   render() {
     
     return (
@@ -287,4 +288,6 @@ export default class ApplyToKita extends Component {
   </div>
 )
 }
+
+
 }
