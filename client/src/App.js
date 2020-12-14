@@ -6,6 +6,7 @@ import KitaDetails from "./components/kitas/KitaDetails";
 import ApplyToKita from "./components/parents/ApplyToKita";
 import AddKita from "./components/kitas/AddKita";
 import EditKita from "./components/kitas/EditKita";
+import EditApplication from "./components/parents/editApplication";
 // import NewKita from "./components/kitas/AddKita";
 import { Route, Switch } from "react-router-dom";
 import Signup from './components/auth/Signup';
@@ -41,6 +42,7 @@ class App extends React.Component {
 
           <Route exact path="/kitas/:id" component={KitaDetails} />
           <Route exact path="/kitas/:id/edit" component={EditKita} />
+          <Route exact path="/parents/:id/edit" component={EditApplication} />
           <Route exact path="/AddKita" render={props => <AddKita {...props} />} />
           
 

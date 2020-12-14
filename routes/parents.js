@@ -11,6 +11,7 @@ router.post('/addParent', (req, res) => {
     childFName,
     childSName,
     dob,
+    boyGirl,
     Parent1FName,
     Parent1SName,
     Parent1Phone,
@@ -25,12 +26,13 @@ router.post('/addParent', (req, res) => {
 
   
   } = req.body;
-  console.log('help with Yosef 1', childSName);
+  console.log('help with Yosef', boyGirl);
 
   Parent.create({
     childFName,
     childSName,
     dob,
+    boyGirl,
     Parent1FName,
     Parent1SName,
     Parent1Phone,
@@ -48,6 +50,7 @@ router.post('/addParent', (req, res) => {
       res.status(201).json(project);
     })
     .catch(err => {
+      console.log(err)
       res.json(err)
     })
 

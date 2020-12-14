@@ -4,6 +4,7 @@ const parentSchema = new Schema({
   childFName: String,
   childSName: String,
   dob: Date,
+  boyGirl: String,
   Parent1FName: String,
   Parent1SName: String,
   Parent1Phone: String,
@@ -13,7 +14,7 @@ const parentSchema = new Schema({
   Parent2Phone: String,
   Parent2Email: String,
   homeLanguage: Array,
-  specialNeeds: Boolean,
+  // specialNeeds: Boolean,
   specialNeedsDetails: String
   // kita: {type: Schema.Types.ObjectId, ref: 'Kita'}, //Kita here means 
   // parent: {type: Schema.Types.ObjectId, ref: 'Parent'}
