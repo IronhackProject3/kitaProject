@@ -39,7 +39,7 @@ export default class Kitas extends Component {
 
     const kitas = [...this.state.kitas].filter(kita => {
       return kita.kitaName.toLowerCase().includes(this.state.search.toLowerCase())
-      || kita.Postcode.toString().includes(this.state.search)
+      || kita.Postcode.includes(this.state.search)
     });
     
     
@@ -59,7 +59,7 @@ export default class Kitas extends Component {
           </Form.Group>
         </Form>
 
-        <h1>Kitas</h1>
+        <h4>Kitas</h4>
 
         <Button variant="primary">
           <Link to="AddKita/"> Add your Kita </Link>

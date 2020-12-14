@@ -39,74 +39,44 @@ router.get('/:id', (req, res) => {
 
 
 // add a kita
-router.post('/', (req, res) => {
-  const { kitaName, Address, Postcode, Telephone, emailAddress, freePlaces, mapLink, languages, totalPlaces, theme, openTime, closeTime, minAge, maxAge } = req.body;
+router.post('/addKita', (req, res) => {
+  const { languages, kitaName, address, postcode, telephone, emailAddress, freePlaces, mapLink, totalPlaces, theme, openTime, closeTime, minAge, maxAge } = req.body;
   // const { childFName, childSName, dob, Parent1FName } = req.body;
   const owner = req.user._id;
   Kita.create({
-    kitaName,
-    Address,
-    Postcode,
-    Telephone,
-    emailAddress,
-    freePlaces,
-    mapLink,
-    languages,
-    totalPlaces,
-    theme,
-    openTime,
-    closeTime,
-    minAge,
-    maxAge,
-    //owner userId
+    languages: languages,
+    kitaName: kitaName,
+    Address: address,
+    Postcode: postcode,
+    Telephone: telephone,
+    emailAddress: emailAddress,
+    freePlaces: freePlaces,
+    mapLink: mapLink,
+    totalPlaces: totalPlaces,
+    theme: theme,
+    openTime: openTime,
+    closeTime: closeTime,
+    minAge: minAge,
+    maxAge: maxAge,
   })
     .then(kita => {
+      console.log(kita);
       User.findByIdAndUpdate(
         owner,
-        { 
-          kita: kita._id
+        {
+          type: 'kita', // type: parent
+          kita: kita._id // parent: parent._id
          },
         // this ensures that we are getting the updated document as a return 
         { new: true }
-      )
-      res.status(201).json(kita);
-    })
-    .catch(err => {
-      res.json(err);
-    })
-})
-
-// add parents
-router.post('/', (req, res) => {
-  const { childFName, childSName, dob, Parent1FName } = req.body;
-  const owner = req.user._id;
-  Kita.create({
-    kitaName,
-    Address,
-    Postcode,
-    Telephone,
-    emailAddress,
-    freePlaces,
-    mapLink,
-    languages,
-    totalPlaces,
-    theme,
-    openTime,
-    closeTime,
-    minAge,
-    maxAge,
-    //owner userId
-  })
-    .then(kita => {
-      User.findByIdAndUpdate(
-        owner,
-        { 
-          kita: kita._id
-         },
-        // this ensures that we are getting the updated document as a return 
-        { new: true }
-      )
-      res.status(201).json(kita);
+      ).then(result => {
+        console.log(result);
+        res.status(201).json(kita);
+      })
+      .catch(err => {
+        console.log(err);
+        res.json(err);
+      })
     })
     .catch(err => {
       res.json(err);
@@ -115,25 +85,25 @@ router.post('/', (req, res) => {
 
 
 // edit kita's information
-router.put('/:id', (req, res) => {
-  const { title, description } = req.body;
+router.put('/:edit', (req, res) => {
+  const { languages, kitaName, address, postcode, telephone, emailAddress, freePlaces, mapLink, totalPlaces, theme, openTime, closeTime, minAge, maxAge } = req.body;
   Kita.findByIdAndUpdate(
     req.params.id,
     { 
-      kitaName,
-      Address,
-      Postcode,
-      Telephone,
-      emailAddress,
-      freePlaces,
-      mapLink,
-      languages,
-      totalPlaces,
-      theme,
-      openTime,
-      closeTime,
-      minAge,
-      maxAge
+      languages: languages,
+      kitaName: kitaName,
+      Address: address,
+      Postcode: postcode,
+      Telephone: telephone,
+      emailAddress: emailAddress,
+      freePlaces: freePlaces,
+      mapLink: mapLink,
+      totalPlaces: totalPlaces,
+      theme: theme,
+      openTime: openTime,
+      closeTime: closeTime,
+      minAge: minAge,
+      maxAge: maxAge,
      },
     // this ensures that we are getting the updated document as a return 
     { new: true }

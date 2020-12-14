@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-import {Form, Button } from 'react-bootstrap';
-import './AddKita.css';
 
-export default class AddKita extends Component {
-
+export default class EditKita extends Component {
+  
   state = {
-    //kita: null,
     languages: [],
     kitaName: '',
     address: '',
@@ -19,10 +17,42 @@ export default class AddKita extends Component {
     theme: '',
     openTime: '',
     closeTime: '',
-    minAge: '',
-    maxAge: '',
+    minAge: 0,
+    maxAge: 0,
   }
 
+  componentDidMount = () => {
+    const id = this.props.match.params.id;
+    axios.get(`/api/kitas/${id}`)
+      .then(response => {
+        console.log("response from details", response);
+        this.setState({
+          languages: response.data.languages,
+          kitaName: response.data.kitaName,
+          address: response.data.Address,
+          postcode: response.data.Postcode,
+          telephone: response.data.Telephone,
+          emailAddress: response.data.emailAddress,
+          freePlaces: response.data.freePlaces,
+          mapLink: response.data.mapLink,
+          totalPlaces: response.data.totalPlaces,
+          theme: response.data.theme,
+          openTime: response.data.openTime,
+          closeTime: response.data.closeTime,
+          minAge: response.data.minAge,
+          maxAge: response.data.maxAge,
+        })
+      })
+      .catch(err => {
+        console.log(err.response)
+        if (err.response.status === 404) {
+          this.setState({
+            error: 'Sorry - Kita Not found 🤷‍♀️ 🤷‍♂️'
+          })
+        }
+      })
+  }
+  
   handleChange = (event) => {
     const {name, value} = event.target
 
@@ -40,7 +70,7 @@ export default class AddKita extends Component {
       this.props.history.push(`/kitas/${response.data._id}`);
     })
   }
-
+  
   allLanguages = {
     German: 'ge',
     English: 'en',
@@ -59,42 +89,13 @@ export default class AddKita extends Component {
     Other: 'other'
 
   }
-
-  // getData = () => {
-  //   const id = this.props.match.params.id;
-  //   // console.log("KitaID is", id)
-  //   axios.get(`/api/kitas/${id}`)
-  //     .then(response => {
-  //       console.log("response from details", response);
-  //       this.setState({
-  //         kita: response.data,
-  //       })
-  //     })
-  //     .catch(err => {
-  //       console.log(err.response)
-  //       if (err.response.status === 404) {
-  //         this.setState({
-  //           error: 'Sorry - Kita Not found 🤷‍♀️ 🤷‍♂️'
-  //         })
-  //       }
-  //     }
-  //   )
-  // }
-
-  // componentDidMount = () => {
-  //   this.getData();
-  // }
   
-
-
-
+  
   render() {
-    
     return (
-      <>
-        <h4>Add your Kita</h4>
-
-        <Form onSubmit={this.handleSubmit} >
+      <div>
+        <h2>Edit Kita details</h2>
+        <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="kitaName">
             <Form.Control 
               type="text" 
@@ -181,9 +182,10 @@ export default class AddKita extends Component {
                 name='languages'
                 onChange={this.handleChange}
                 required
+                //defaultValue={this.state.languages}
               >
                 {Object.keys(this.allLanguages).map( lang => (
-                  <option key={lang} value={this.allLanguages[lang]}>{lang}</option>
+                  <option key={lang} value={this.allLanguages[lang]} selected={this.state.languages.includes(this.allLanguages[lang])}>{lang}</option>
                 ))}
               </Form.Control>
           </Form.Group>
@@ -299,10 +301,10 @@ export default class AddKita extends Component {
           </Form.Group>
 
           <Button variant="primary" type="submit">
-            Submit
+            Update Kita details
           </Button>
         </Form>
-      </>
+      </div>
     )
   }
 }
