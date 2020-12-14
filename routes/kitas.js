@@ -78,7 +78,7 @@ router.post('/', (req, res) => {
 
 // add parents
 router.post('/', (req, res) => {
-  const { childFName, childSName, dob, Parent1FName } = req.body;
+  // const { childFName, childSName, dob, Parent1FName } = req.body;
   const owner = req.user._id;
   Kita.create({
     kitaName,
