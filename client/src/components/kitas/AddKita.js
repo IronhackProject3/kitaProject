@@ -42,7 +42,7 @@ export default class AddKita extends Component {
   }
 
   allLanguages = {
-    German: 'ge',
+    German: 'de',
     English: 'en',
     Turkish: 'tr',
     Russian: 'ru',
