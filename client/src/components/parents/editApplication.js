@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import {Form, Button} from 'react-bootstrap'
-
 // const Parent = require('../.././.././.././models/Parent');
-export default class ApplyToKita extends Component {
+
+export default class EditApplication extends Component {
  
   state = {
     childFName: '',
@@ -18,6 +18,7 @@ export default class ApplyToKita extends Component {
     Parent2SName: '',
     Parent2Phone: '',
     Parent2Email: '',
+    //applicationObject,
     homeLanguage: '',
     specialNeeds: '',
     specialNeedsDetails: ''
@@ -41,6 +42,7 @@ export default class ApplyToKita extends Component {
           Parent2SName: response.data.Parent2SName,
           Parent2Phone: response.data.Parent2Phone,
           Parent2Email: response.data.Parent2Email,
+          //applicationObject,
           homeLanguage: response.data.homeLanguage,
           specialNeeds: response.data.specialNeeds,
           specialNeedsDetails: response.data.specialNeedsDetails,

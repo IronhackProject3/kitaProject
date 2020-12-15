@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap'
 import './Kitas.css';
 
-
-export default class Kitas extends Component {
+ 
+export default class ApplicationList extends Component {
 
   state = {
     kitas: [],

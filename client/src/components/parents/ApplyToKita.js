@@ -19,6 +19,7 @@ export default class ApplyToKita extends Component {
     Parent2SName: '',
     Parent2Phone: '',
     Parent2Email: '',
+    applications: '',
     homeLanguage: '',
     specialNeeds: '',
     specialNeedsDetails: ''
@@ -27,7 +28,7 @@ export default class ApplyToKita extends Component {
   
   getData = () => {
     const id = this.props.match.params.id;
-    // console.log("KitaID is", id)
+    console.log("KitaID is", id)
     axios.get(`/api/kitas/${id}`)
     .then(response => {
       // console.log("response from details", response);
@@ -61,11 +62,15 @@ export default class ApplyToKita extends Component {
   
   handleSubmit = event => { // work here
     event.preventDefault()
-    axios.post('/api/parent/addParent',this.state)
+    let parentInfo = this.state
+    let kitaInfo = {kitaId : this.props.match.params.id, kitaPriority : '',  } //this.props.match.params.id}  //new    find where kita comes from
+    console.log('67', kitaInfo)
+    axios.post('/api/parent/addParent',{parentInfo: parentInfo, kitaInfo: kitaInfo}) //new
+    //   axios.post('/api/parent/addParent',this.state) 
     .then(response => {
       console.log(response);
-      this.props.setUserParent(response.data._id);
-      //this.props.history.push(`/kitas/${response.data._id}`);
+      // this.props.setUserParent(response.data._id);
+      this.props.history.push(`/kitas/${response.data._id}`);
     })
   }
   
@@ -91,7 +96,7 @@ export default class ApplyToKita extends Component {
   
   
   render() {
-    
+    console.log(this.props.match.params.id)
     return (
       <div>
 
