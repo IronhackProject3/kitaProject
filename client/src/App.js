@@ -7,9 +7,9 @@ import ApplyToKita from "./components/parents/ApplyToKita";
 import AddKita from "./components/kitas/AddKita";
 import EditKita from "./components/kitas/EditKita";
 import EditApplication from "./components/parents/editApplication";
-// import NewKita from "./components/kitas/AddKita";
 import { Route, Switch } from "react-router-dom";
 import Signup from './components/auth/Signup';
+import Login from './components/auth/Login';
 import { Container } from "react-bootstrap";
 
 
@@ -30,6 +30,24 @@ class App extends React.Component {
     })
   }
 
+  setUserKita = kita => {
+    this.setState({
+      user: {
+        ...this.state.user,
+        kita: kita
+      }
+    })
+  }
+
+  setUserParent = parent => {
+    this.setState({
+      user: {
+        ...this.state.user,
+        parent: parent
+      }
+    })
+  }
+
 
   render() {
     return (
@@ -37,17 +55,16 @@ class App extends React.Component {
         <Navbar setUser={this.setUser} user={this.state.user} />
         <Switch>
           <Route exact path="/signup" render={props => <Signup setUser={this.setUser} {...props} />} />
+          <Route exact path="/login" render={props => <Login setUser={this.setUser} {...props} />} />
 
           <Route exact path="/" component={Kitas} />
-
           <Route exact path="/kitas/:id" component={KitaDetails} />
           <Route exact path="/kitas/:id/edit" component={EditKita} />
-          <Route exact path="/parents/:id/edit" component={EditApplication} />
-          <Route exact path="/AddKita" render={props => <AddKita {...props} />} />
+          <Route exact path="/AddKita" render={props => <AddKita setUserKita={this.setUserKita} {...props} />} />
           
-
-          // <Route exact path="/kitas/" component={ApplyToKita} />
+          <Route exact path="/addProfile" render={props => <ApplyToKita setUserParent={this.setUserParent} {...props} />} />
           <Route exact path="/kitas/:id/signup" component={ApplyToKita} />
+          <Route exact path="/parents/:id/edit" component={EditApplication} />
 
 
           <Route component={this.NotFound} />

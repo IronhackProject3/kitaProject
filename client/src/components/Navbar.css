@@ -1,0 +1,17 @@
+.navbar a {
+  color: white;
+}
+
+.navbar a:hover {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar-nav a {
+  color: white !important;
+}
+
+.navbar-nav a:hover {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8) !important;
+}

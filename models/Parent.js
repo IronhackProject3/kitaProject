@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
+
 const parentSchema = new Schema({
   childFName: String,
   childSName: String,
@@ -15,9 +16,7 @@ const parentSchema = new Schema({
   Parent2Email: String,
   homeLanguage: Array,
   // specialNeeds: Boolean,
-  specialNeedsDetails: String
-  // kita: {type: Schema.Types.ObjectId, ref: 'Kita'}, //Kita here means 
-  // parent: {type: Schema.Types.ObjectId, ref: 'Parent'}
+  specialNeedsDetails: String,
 });
 
 const Parent = mongoose.model('Parent', parentSchema); 
