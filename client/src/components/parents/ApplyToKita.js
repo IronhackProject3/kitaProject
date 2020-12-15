@@ -63,7 +63,7 @@ export default class ApplyToKita extends Component {
   handleSubmit = event => { // work here
     event.preventDefault()
     let parentInfo = this.state
-    let kitaInfo = {kitaId : this.props.match.params.id } //this.props.match.params.id}  //new    find where kita comes from
+    let kitaInfo = {kitaId : this.props.match.params.id, kitaPriority : '',  } //this.props.match.params.id}  //new    find where kita comes from
     console.log('67', kitaInfo)
     axios.post('/api/parent/addParent',{parentInfo: parentInfo, kitaInfo: kitaInfo}) //new
     //   axios.post('/api/parent/addParent',this.state) 

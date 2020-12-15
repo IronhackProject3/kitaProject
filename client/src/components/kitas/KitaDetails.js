@@ -54,8 +54,32 @@ export default class KitaDetails extends Component {
             <p><strong>Telephone: </strong>{this.state.kita.Telephone}</p>
             <p><strong>Email: </strong><a href={"mailto:" + this.state.kita.emailAddress}> {this.state.kita.emailAddress}</a></p>
 
-            <Button variant="primary">
+
+            {/* {props.user.type === 'parent' ? ( // && this.state.kita. is not in the parent (
+            <>
+              <Nav.Link as={Link} to={`/kitas/${props.user.kita}`}>My Kita</Nav.Link>
+              <Nav.Link as={Link} to='/' onClick={() => handleLogout(props)}>Logout</Nav.Link>
+            </>
+          ): (
+            <>
+            </>
+         )} */}
+
+
+
+            <Button variant="primary">  {/* display if userid corrsponds to parent and DOES NOT exist in the parents table and kitaId is not in the parent applications array*/}
               <Link to={`/kitas/${this.state.kita._id}/signup`}> Apply to {this.state.kita.kitaName}</Link> 
+            </Button>
+            <br /><br />
+
+            <Button variant="primary">  {/* display if userid corrsponds to parent and DOES exist in the parents table and kitaId is not in the parent applications array */}
+              <Link to={`/kitas/${this.state.kita._id}/signup`}> Apply to {this.state.kita.kitaName}</Link> 
+            </Button>
+            <br /><br />
+
+
+            <Button variant="primary">  {/* display if userid corrsponds to parent and DOES exist in the parents table and kitaId is not in the parent applications array */}
+              <Link to={`/kitas/${this.state.kita._id}`}> You have applied to {this.state.kita.kitaName}</Link> 
             </Button>
             <br /><br />
 
