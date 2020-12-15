@@ -48,7 +48,7 @@ export default class KitaDetails extends Component {
   render() {
     
     return (
-      
+      // julianas code
       <div>
         {this.state.kita && (
           <>
