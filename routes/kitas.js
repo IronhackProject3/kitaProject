@@ -40,7 +40,7 @@ router.get('/:id', (req, res) => {
 
 // add a kita
 router.post('/addKita', (req, res) => {
-  const { languages, kitaName, address, postcode, telephone, emailAddress, freePlaces, mapLink, totalPlaces, theme, openTime, closeTime, minAge, maxAge } = req.body;
+  const { languages, kitaName, address, postcode, telephone, emailAddress, freePlaces, totalPlaces, theme, openTime, closeTime, minAge, maxAge, imageURL, imagePublicID } = req.body;
   // const { childFName, childSName, dob, Parent1FName } = req.body;
   const owner = req.user._id;
   Kita.create({
@@ -52,14 +52,14 @@ router.post('/addKita', (req, res) => {
     Telephone: telephone,
     emailAddress: emailAddress,
     freePlaces: freePlaces,
-    mapLink: mapLink,
     totalPlaces: totalPlaces,
     theme: theme,
     openTime: openTime,
     closeTime: closeTime,
     minAge: minAge,
     maxAge: maxAge,
-
+    imageURL: imageURL,
+    imagePublicID: imagePublicID
   })
     .then(kita => {
       console.log('new kita', kita);
@@ -87,9 +87,11 @@ router.post('/addKita', (req, res) => {
 
 
 // edit kita's information
-router.put('/:edit', (req, res) => {
-  const { languages, kitaName, address, postcode, telephone, emailAddress, freePlaces, mapLink, totalPlaces, theme, openTime, closeTime, minAge, maxAge } = req.body;
-  Kita.findByIdAndUpdate(
+router.put('/edit/:id', (req, res) => {
+      const { languages, kitaName, address, postcode, telephone, emailAddress, freePlaces, totalPlaces, theme, openTime, closeTime, minAge, maxAge, imageURL, imagePublicID } = req.body;
+  console.log('body', req.body);
+  console.log('params', req.params);
+      Kita.findByIdAndUpdate(
     req.params.id,
     { 
       languages: languages,
@@ -99,13 +101,14 @@ router.put('/:edit', (req, res) => {
       Telephone: telephone,
       emailAddress: emailAddress,
       freePlaces: freePlaces,
-      mapLink: mapLink,
       totalPlaces: totalPlaces,
       theme: theme,
       openTime: openTime,
       closeTime: closeTime,
       minAge: minAge,
       maxAge: maxAge,
+      imageURL: imageURL,
+      imagePublicID: imagePublicID
      },
     // this ensures that we are getting the updated document as a return 
     { new: true }

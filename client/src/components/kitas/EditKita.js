@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
+import service from "../../services/upload";
 
 export default class EditKita extends Component {
   
@@ -12,13 +13,16 @@ export default class EditKita extends Component {
     telephone: '',
     emailAddress: '',
     freePlaces: 0,
-    mapLink: '',
     totalPlaces: 0,
     theme: '',
     openTime: '',
     closeTime: '',
     minAge: 0,
     maxAge: 0,
+    imageURL: '',
+    publicID: '',
+    submitted: false,
+    imageSelected: false,
   }
 
   componentDidMount = () => {
@@ -34,14 +38,16 @@ export default class EditKita extends Component {
           telephone: response.data.Telephone,
           emailAddress: response.data.emailAddress,
           freePlaces: response.data.freePlaces,
-          mapLink: response.data.mapLink,
           totalPlaces: response.data.totalPlaces,
           theme: response.data.theme,
           openTime: response.data.openTime,
           closeTime: response.data.closeTime,
           minAge: response.data.minAge,
           maxAge: response.data.maxAge,
+          imageURL: response.data.imageURL,
+          publicID: response.data.publicID
         })
+        console.log('image url from edit form', response.data.imageURL);
       })
       .catch(err => {
         console.log(err.response)
@@ -61,10 +67,41 @@ export default class EditKita extends Component {
       : value})
 
   }
+
+  handleFileUpload = e => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+    this.setState({
+      imageSelected: true
+    });
+    const uploadData = new FormData();
+    uploadData.append("imageURL", e.target.files[0]);
+
+    service.handleUpload(uploadData)
+      .then(response => {
+        console.log(response);
+        const imageURL = response.secure_url;
+        const publicID = response.public_id;
+        console.log('res from handleupload: ', response.secure_url);
+        this.setState({ imageURL: imageURL, publicID: publicID });
+        console.log('new state: ', this.state.imageURL);
+        // check if the form already got submitted and only waits for the image upload
+        if (this.state.submitted === true) {
+          this.handleSubmit();
+        }
+      })
+      .catch(err => {
+        this.setState({
+          imageSelected: false
+        });
+        console.log("Error while uploading the file: ", err);
+      });
+  }
   
   handleSubmit = (event) => {
     event.preventDefault()
-    axios.post('/api/kitas/addKita',this.state)
+    const id = this.props.match.params.id;
+    console.log(this.state)
+    axios.put(`/api/kitas/edit/${id}`,this.state)
     .then(response => {
       console.log(response);
       this.props.history.push(`/kitas/${response.data._id}`);
@@ -153,19 +190,6 @@ export default class EditKita extends Component {
               placeholder="Email Address of Kita Administrator" 
               name='emailAddress'
               value={this.state.emailAddress}
-              onChange={this.handleChange}
-              required      
-            />
-            <Form.Text className="text-muted">
-            </Form.Text>
-          </Form.Group>
-
-          <Form.Group controlId="mapLink">
-            <Form.Control 
-              type="text" 
-              placeholder="Google Maps link" 
-              name='mapLink'
-              value={this.state.mapLink}
               onChange={this.handleChange}
               required      
             />
@@ -297,6 +321,16 @@ export default class EditKita extends Component {
             />
             <Form.Text className="text-muted">
             </Form.Text>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label htmlFor="imageURL">Upload your kita image here: </Form.Label>
+            <Form.Control
+              type="file"
+              name="image"
+              id="image"
+              onChange={this.handleFileUpload}
+            />
           </Form.Group>
 
           <Button variant="primary" type="submit">

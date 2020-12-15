@@ -8,7 +8,6 @@ const kitaSchema = new Schema({
   Telephone: String, 
   emailAddress: String, 
   freePlaces: Number, 
-  mapLink: String, 
   languages: Array, 
   totalPlaces: Number, 
   theme: String, 
@@ -17,6 +16,8 @@ const kitaSchema = new Schema({
   minAge: Number, 
   maxAge: Number , 
   password: String,
+  imageURL: String,
+  imagePublicID: String
 });
 
 const Kita = mongoose.model('Kita', kitaSchema);
