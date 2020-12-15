@@ -14,6 +14,13 @@ const parentSchema = new Schema({
   Parent2SName: String,
   Parent2Phone: String,
   Parent2Email: String,
+  // kitaId: String,
+  applications:  [{
+    kitaId : String,
+    date: { type: Date, default: Date.now },
+    kitaPriority: Number,
+    ParentPriority: Number
+     }],
   homeLanguage: Array,
   // specialNeeds: Boolean,
   specialNeedsDetails: String,
