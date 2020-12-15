@@ -35,7 +35,7 @@ export default class Kitas extends Component {
   };
 
   render() {
-    console.log(this.state.kitas);
+    // console.log(this.state.kitas);
 
     const kitas = [...this.state.kitas].filter(kita => {
       return kita.kitaName.toLowerCase().includes(this.state.search.toLowerCase())

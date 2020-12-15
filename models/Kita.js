@@ -17,7 +17,6 @@ const kitaSchema = new Schema({
   minAge: Number, 
   maxAge: Number , 
   password: String,
-  // owner: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
 const Kita = mongoose.model('Kita', kitaSchema);

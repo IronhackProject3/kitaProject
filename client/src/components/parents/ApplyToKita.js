@@ -27,10 +27,10 @@ export default class ApplyToKita extends Component {
   
   getData = () => {
     const id = this.props.match.params.id;
-    console.log("KitaID is", id)
+    // console.log("KitaID is", id)
     axios.get(`/api/kitas/${id}`)
     .then(response => {
-      console.log("response from details", response);
+      // console.log("response from details", response);
       this.setState({
         kita: response.data,
       })
@@ -55,7 +55,7 @@ export default class ApplyToKita extends Component {
     this.setState ({[name]: name === 'homeLanguage'
     ? [...event.target.selectedOptions].map(opt => opt.value)
     : value})
-    console.log('boy & girl', this.state.boyGirl)
+    // console.log('boy & girl', this.state.boyGirl)
     
   }
   
@@ -64,6 +64,8 @@ export default class ApplyToKita extends Component {
     axios.post('/api/parent/addParent',this.state)
     .then(response => {
       console.log(response);
+      this.props.setUserParent(response.data._id);
+      //this.props.history.push(`/kitas/${response.data._id}`);
     })
   }
   
@@ -86,14 +88,6 @@ export default class ApplyToKita extends Component {
     Other: 'other'
     
   }
-  
-  
-  
-  // onValueChange(value) {
-  //   this.setState({
-  //     boyGirl: value
-  //   });
-  // }
   
   
   render() {
@@ -144,7 +138,7 @@ export default class ApplyToKita extends Component {
 
 
 
-<Form.Group controlId="boyGirl">
+        <Form.Group controlId="boyGirl">
             {/* <Form.Label>User type: </Form.Label> */}
             <Form.Control 
               as="select" 

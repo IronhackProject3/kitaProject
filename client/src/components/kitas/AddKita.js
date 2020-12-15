@@ -58,7 +58,6 @@ export default class AddKita extends Component {
     Dutch: 'nl',
     SignLanguage: 'Sign Language',
     Other: 'other'
-
   }
 
   render() {

@@ -4,10 +4,10 @@ const userSchema = new Schema({
   username: String,
   password: String,
   type: String,  // kita admin or parent
-  kita: {type: Schema.Types.ObjectId, ref: 'Kita'}, //Kita here means 
+  kita: {type: Schema.Types.ObjectId, ref: 'Kita'},
   parent: {type: Schema.Types.ObjectId, ref: 'Parent'}
 });
 
 
-const User = mongoose.model('User', userSchema); //  check here
+const User = mongoose.model('User', userSchema);
 module.exports = User;

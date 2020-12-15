@@ -59,9 +59,9 @@ export default class KitaDetails extends Component {
             </Button>
             <br /><br />
 
-            <Button variant="primary">
+            {/* <Button variant="primary">
               <Link to={`/kitas/${this.state.kita._id}/edit`}> Edit {this.state.kita.kitaName}</Link> 
-            </Button>
+            </Button> */}
             
 
           </>
