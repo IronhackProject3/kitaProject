@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Form, Button } from 'react-bootstrap';
 import './AddKita.css';
+import service from "../../services/upload";
 
 export default class AddKita extends Component {
 
@@ -14,13 +15,16 @@ export default class AddKita extends Component {
     telephone: '',
     emailAddress: '',
     freePlaces: 0,
-    mapLink: '',
     totalPlaces: 0,
     theme: '',
     openTime: '',
     closeTime: '',
     minAge: '',
     maxAge: '',
+    imageURL: '',
+    publicID: '',
+    submitted: false,
+    imageSelected: false,
   }
 
   handleChange = (event) => {
@@ -31,15 +35,60 @@ export default class AddKita extends Component {
       : value})
 
   }
+
+  handleFileUpload = e => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+    this.setState({
+      imageSelected: true
+    });
+    const uploadData = new FormData();
+    uploadData.append("imageURL", e.target.files[0]);
+
+    service.handleUpload(uploadData)
+      .then(response => {
+        const imageURL = response.secure_url;
+        const publicID = response.public_id;
+        console.log('res from handleupload: ', response.secure_url);
+        this.setState({ imageURL: imageURL, publicID: publicID });
+        console.log('new state: ', this.state.imageURL);
+        // check if the form already got submitted and only waits for the image upload
+        if (this.state.submitted === true) {
+          this.handleSubmit();
+        }
+      })
+      .catch(err => {
+        this.setState({
+          imageSelected: false
+        });
+        console.log("Error while uploading the file: ", err);
+      });
+  }
+
   
   handleSubmit = (event) => {
-    event.preventDefault()
-    axios.post('/api/kitas/addKita',this.state)
-    .then(response => {
-      console.log(response);
-      this.props.setUserKita(response.data._id);
-      this.props.history.push(`/kitas/${response.data._id}`);
+    if (event) {
+      event.preventDefault();
+    }
+    if (this.state.imageURL || !this.state.imageSelected) {
+      axios.post('/api/kitas/addKita',this.state)
+      .then(response => {
+        // console.log(response);
+        this.props.setUserKita(response.data._id);
+        this.props.history.push(`/kitas/${response.data._id}`);
+        this.setState({
+          imageURL: "",
+          publicID: ""
+        });
     })
+    .catch(err => {
+      console.log(err);
+    });
+      } else {
+        // set a flag that the project got submitted
+        this.setState({
+          submitted: true
+      })
+    }
   }
 
   allLanguages = {
@@ -125,19 +174,6 @@ export default class AddKita extends Component {
               placeholder="Email Address of Kita Administrator" 
               name='emailAddress'
               value={this.state.emailAddress}
-              onChange={this.handleChange}
-              required      
-            />
-            <Form.Text className="text-muted">
-            </Form.Text>
-          </Form.Group>
-
-          <Form.Group controlId="mapLink">
-            <Form.Control 
-              type="text" 
-              placeholder="Google Maps link" 
-              name='mapLink'
-              value={this.state.mapLink}
               onChange={this.handleChange}
               required      
             />
@@ -268,6 +304,16 @@ export default class AddKita extends Component {
             />
             <Form.Text className="text-muted">
             </Form.Text>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label htmlFor="imageURL">Upload your kita image here: </Form.Label>
+            <Form.Control
+              type="file"
+              name="image"
+              id="image"
+              onChange={this.handleFileUpload}
+            />
           </Form.Group>
 
           <Button variant="primary" type="submit">

@@ -64,7 +64,7 @@ export default class ApplyToKita extends Component {
     axios.post('/api/parent/addParent',this.state)
     .then(response => {
       console.log(response);
-      this.props.setUserParent(response.data._id);
+      //this.props.setUserParent(response.data._id);
       //this.props.history.push(`/kitas/${response.data._id}`);
     })
   }

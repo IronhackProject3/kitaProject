@@ -87,5 +87,7 @@ app.use('/api/parent', parents);
 const auth = require('./routes/auth');
 app.use('/api/auth', auth);
 
+const uploadRoutes = require('./routes/file-upload');
+app.use('/api/upload', uploadRoutes);
 
 module.exports = app;
