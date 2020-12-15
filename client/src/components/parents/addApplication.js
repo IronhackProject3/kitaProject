@@ -12,7 +12,9 @@ const newParent = (    childFName,
   Parent2SName,
   Parent2Phone,
   Parent2Email,
-  homeLanguage,
+  kitaId,
+  applications, // add  / push to array of objects and object containing: loggedin id, current kita id, timestamp, , kita priority value
+  homeLanguage, 
   specialNeeds,
   
   specialNeedsDetails) => {
@@ -29,6 +31,8 @@ const newParent = (    childFName,
       Parent2SName,
       Parent2Phone,
       Parent2Email,
+      kitaId,
+      applications,
       homeLanguage,
       specialNeeds,
       specialNeedsDetails }) // fix
@@ -38,7 +42,7 @@ const newParent = (    childFName,
     .catch(err => {
       return err.response.data;
     });
-}
+} 
 
 
 export { newParent };

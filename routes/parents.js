@@ -3,10 +3,8 @@ const router = express.Router();
 const Parent = require('../models/Parent');
 const User = require('../models/User');
 
-
 router.post('/addParent', (req, res) => {
   const { 
-    
     childFName,
     childSName,
     dob,
@@ -19,15 +17,19 @@ router.post('/addParent', (req, res) => {
     Parent2SName,
     Parent2Phone,
     Parent2Email,
+    applications,
+    kitaId,
     homeLanguage,
     specialNeeds,
     specialNeedsDetails
-
+    
+  } = req.body.parentInfo;
   
-  } = req.body;
+  const{ 
+    test
+  } = req.body.kitaInfo;
   
   const owner = req.user._id;
-  // console.log('help with Yosef', boyGirl);
 
   Parent.create({
     childFName,
@@ -42,10 +44,14 @@ router.post('/addParent', (req, res) => {
     Parent2SName,
     Parent2Phone,
     Parent2Email,
+    applications: [{
+      kitaId: req.body.kitaInfo.kitaId,
+      kitaPriority: ""
+    }],
+    kitaId,
     homeLanguage,
     specialNeeds,
     specialNeedsDetails
-    
   })
     .then(parent => {
       
