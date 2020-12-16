@@ -21,7 +21,8 @@ class App extends React.Component {
   }
 
   state = {
-    user: this.props.user
+    user: this.props.user,
+    parent: null
   }
 
   setUser = user => {
@@ -47,6 +48,12 @@ class App extends React.Component {
       }
     })
   }
+  // trying to get the parent info across the app
+  setParent = parent => {
+    this.setState({
+      parent: parent
+    })
+  }
 
 
   render() {
@@ -55,15 +62,15 @@ class App extends React.Component {
         <Navbar setUser={this.setUser} user={this.state.user} />
         <Switch>
           <Route exact path="/signup" render={props => <Signup setUser={this.setUser} {...props} />} />
-          <Route exact path="/login" render={props => <Login setUser={this.setUser} {...props} />} />
+          <Route exact path="/login" render={props => <Login setUser={this.setUser} setParent={this.setParent} {...props} />} />
 
           <Route exact path="/" component={Kitas} />
-          <Route exact path="/kitas/:id" component={KitaDetails} />
+          <Route exact path="/kitas/:id" render={props => <KitaDetails user={this.state.user} {...props} />} />
           <Route exact path="/kitas/:id/edit" component={EditKita} />
           <Route exact path="/AddKita" render={props => <AddKita setUserKita={this.setUserKita} {...props} />} />
           
-          <Route exact path="/addProfile" render={props => <ApplyToKita setUserParent={this.setUserParent} {...props} />} />
-          <Route exact path="/kitas/:id/signup" component={ApplyToKita} />
+          <Route exact path="/addProfile" render={props => <ApplyToKita setUserParent={this.setUserParent} {...props} user={this.state.user} />} />
+          <Route exact path="/kitas/:id/signup" render={props => <ApplyToKita setUserParent={this.setUserParent} {...props} user={this.state.user} />} />
           <Route exact path="/parents/:id/edit" component={EditApplication} />
 
 

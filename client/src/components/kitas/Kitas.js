@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Form, Button } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import './Kitas.css';
 
 

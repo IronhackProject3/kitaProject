@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Alert } from 'react-bootstrap';
 import { signup } from '../../services/auth';
+import { Link } from "react-router-dom";
 
 export default class Signup extends Component {
 
@@ -85,6 +86,7 @@ export default class Signup extends Component {
           )}
           <Button type='submit'>Signup</Button>
         </Form>
+        <p>Already have an account? <Link to={`/login`}>Login</Link></p>
       </>
     )
   }
