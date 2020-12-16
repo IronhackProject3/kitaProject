@@ -65,8 +65,9 @@ class App extends React.Component {
           <Route exact path="/login" render={props => <Login setUser={this.setUser} setParent={this.setParent} {...props} />} />
 
           <Route exact path="/" component={Kitas} />
-          <Route exact path="/kitas/:id" render={props => <KitaDetails user={this.state.user} {...props} />} />
           <Route exact path="/kitas/applications" render={props => <ListofParents user={this.state.user} {...props} />} />
+          <Route exact path="/kitas/:id" render={props => <KitaDetails user={this.state.user} {...props} />} />
+          
           <Route exact path="/kitas/:id/edit" component={EditKita} />
           <Route exact path="/AddKita" render={props => <AddKita setUserKita={this.setUserKita} {...props} />} />
           
@@ -74,7 +75,6 @@ class App extends React.Component {
           <Route exact path="/kitas/:id/signup" render={props => <ApplyToKita setUserParent={this.setUserParent} {...props} user={this.state.user} />} />
           <Route exact path="/parents/:id/edit" component={EditApplication} />
           <Route exact path="/parents/applications" render={props => <ListOfKitas {...props} parent={this.state.parent} />} />
-
 
           <Route component={this.NotFound} />
         </Switch>
