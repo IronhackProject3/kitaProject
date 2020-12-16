@@ -165,6 +165,7 @@ export default class KitaDetails extends Component {
           </>
         )}
       </div>
+      
     );
   }
 }

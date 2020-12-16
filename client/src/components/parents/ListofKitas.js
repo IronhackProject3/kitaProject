@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import axios from 'axios';
 
 
+
 export default class ListOfKitas extends Component {
 
   state = {
     kitas: [],
+    parentsList: [],
   }
 
   componentDidMount = () => {
@@ -25,17 +27,34 @@ export default class ListOfKitas extends Component {
 
 
   render() {
-    //console.log(this.state.kitas);
-    
+    console.log(this.state.kitas);
     
     return (
       <>
         <h1>List of kitas I've applied</h1>
-        {/* {this.kitas.map( application => (
-                  <li>{application}</li>
-                ))} */}
+        <ul>
+          {this.state.kitas.map( application => (
+            <li key={application}>{application}</li>
+          ))}
+        </ul>
+        
       </>
     )
   }
 }
 
+ {/* <DragDropContext>
+          <Droppable droppableId="characters">
+            <Draggable>
+              {(provided) => (
+                <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
+                  {this.state.kitas.map( application => => {
+                    return (
+                      <li key={application}>{application}</li>
+                    );
+                  })}
+                </ul>
+              )}
+            </Draggable>
+          </Droppable>
+        </DragDropContext> */}
