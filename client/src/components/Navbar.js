@@ -28,6 +28,7 @@ export default function Navbar(props) {
           {props.user && props.user.type === 'kita' && props.user.kita ? (
             <>
               <Nav.Link as={Link} to={`/kitas/${props.user.kita}`}>My Kita</Nav.Link>
+              <Nav.Link as={Link} to={`/kitas/applications`}>Parent Applications</Nav.Link>
               <Nav.Link as={Link} to='/' onClick={() => handleLogout(props)}>Logout</Nav.Link>
             </>
           ) : props.user && props.user.type === 'kita' && !props.user.kita ? (

@@ -12,8 +12,7 @@ import Signup from './components/auth/Signup';
 import ListOfKitas from './components/parents/ListOfKitas';
 import Login from './components/auth/Login';
 import { Container } from "react-bootstrap";
-
-
+import ListofParents from "./components/kitas/ListofParents";
 
 class App extends React.Component {
 
@@ -67,6 +66,7 @@ class App extends React.Component {
 
           <Route exact path="/" component={Kitas} />
           <Route exact path="/kitas/:id" render={props => <KitaDetails user={this.state.user} {...props} />} />
+          <Route exact path="/kitas/applications" render={props => <ListofParents user={this.state.user} {...props} />} />
           <Route exact path="/kitas/:id/edit" component={EditKita} />
           <Route exact path="/AddKita" render={props => <AddKita setUserKita={this.setUserKita} {...props} />} />
           

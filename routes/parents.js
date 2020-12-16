@@ -4,6 +4,20 @@ const Parent = require("../models/Parent");
 const User = require("../models/User");
 const Kita = require("../models/Kita");
 
+router.get("/", (req, res) => {
+
+  Parent
+    .find()
+    .then((result) => {
+      console.log(result);
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json(err);
+    });
+});
+
 router.post("/addParent", (req, res) => {
   const {
     childFName,
@@ -158,11 +172,5 @@ router.get("/:id/listOfKitas", (req, res) => {
       res.json(err);
     })
 });
-
-
-  
-
-
-
 
 module.exports = router;
