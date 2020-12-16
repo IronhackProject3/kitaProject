@@ -4,6 +4,20 @@ const Parent = require("../models/Parent");
 const User = require("../models/User");
 const ObjectId = require('mongoose').Types.ObjectId;
 
+router.get("/", (req, res) => {
+
+  Parent
+    .find()
+    .then((result) => {
+      console.log(result);
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json(err);
+    });
+});
+
 router.post("/addParent", (req, res) => {
   const {
     childFName,
@@ -127,5 +141,7 @@ console.log(parentId);
       res.json(err);
     });
 });
+
+
 
 module.exports = router;
