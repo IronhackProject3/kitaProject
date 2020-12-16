@@ -1,0 +1,11 @@
+
+li[data-gender="girl"] { 
+  background-color:#d9ffd6
+
+
+ }
+ li[data-gender="boy"] { 
+  background-color:#faf8c5
+ 
+ 
+  }
