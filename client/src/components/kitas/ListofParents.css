@@ -1,11 +1,11 @@
 
 li[data-gender="girl"] { 
-  color: pink 
+  background-color:#d9ffd6
 
 
  }
  li[data-gender="boy"] { 
-   color: blue
+  background-color:#faf8c5
  
  
   }

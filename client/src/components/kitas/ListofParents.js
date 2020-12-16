@@ -21,10 +21,19 @@ getData = () => {
         return  applicant.kitaId == this.props.user.kita })}  // true if the ids match  - filter further by adding conditions 
     })
     const filteredApplication = obj.filter(applicant => applicant.applications.length > 0) //filtering by populated or not
-   // setState of parentsList
    
+   
+   
+  //   const sortedAndFiltered  =  filteredApplication.fromEntries(
+  //     filteredApplication.entries(filteredApplication.childFName).sort(([,a],[,b]) => a-b));
+  //  // setState of parentsList
+  //  console.log('sortedAndFiltered ',  filteredApplication)
+
+  
    this.setState({ // puts the filtered set of data into the state
-      parentsList: filteredApplication
+   
+   
+    parentsList: filteredApplication //sortedAndFiltered
     })
   }).catch(error => {
     console.log(error)
@@ -36,6 +45,26 @@ this.getData()
 }
 
   render() {
+
+  const  allLanguages = {
+      de: 'German ',
+      en: 'English ',
+      Turkish: 'tr',
+      ru: 'Russian ',
+      Spanish: 'es',
+      French: 'fr',
+      Arabic: 'ar',
+      Polish: 'pl',
+      Italian: 'it',
+      Kurdish: 'ku', 
+      Greek: 'el',
+      Portugese: 'pt',
+      Dutch: 'nl',
+      SignLanguage: 'Sign Language',
+      Other: 'other'
+    }
+
+
     console.log(this.props)
     
     return (
@@ -43,7 +72,7 @@ this.getData()
         <h1>List of Applicants</h1>
         <ul>
          {this.state.parentsList.map(parent => {
-           return (<li data-gender={parent.boyGirl}>{parent.childFName},  born {parent.dob.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)} </li>)
+           return (<li data-gender={parent.boyGirl}>{parent.childFName},  born {parent.dob.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)},  {parent.homeLanguage.map(language => allLanguages[language])}  </li>)
          })}
           </ul>
       </div>
