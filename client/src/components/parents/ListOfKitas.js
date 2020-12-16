@@ -15,7 +15,7 @@ export default class ListOfKitas extends Component {
     
     axios.get(`/api/parent/${parent}/ListOfkitas`)
     .then(response => {
-      console.log(response.data);
+      console.log('kitas', response.data);
       this.setState({
         kitas: response.data
       })

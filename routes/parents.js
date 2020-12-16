@@ -29,10 +29,8 @@ router.post("/addParent", (req, res) => {
     Parent1SName,
     Parent1Phone,
     Parent1Email,
-    Parent2FName,
-    Parent2SName,
-    Parent2Phone,
-    Parent2Email,
+    ParentAddress,
+    ParentPostcode,
     applications,
     kitaId,
     homeLanguage,
@@ -51,17 +49,15 @@ router.post("/addParent", (req, res) => {
     Parent1SName,
     Parent1Phone,
     Parent1Email,
-    Parent2FName,
-    Parent2SName,
-    Parent2Phone,
-    Parent2Email,
-    applications: [
+    ParentAddress,
+    ParentPostcode,
+    applications: req.body.kitaInfo.kitaId ? [
       {
         kitaId: req.body.kitaInfo.kitaId,
         kitaPriority: 0,
         parentPriority: 0
       },
-    ],
+    ] : [],
     kitaId,
     homeLanguage,
   })
@@ -179,7 +175,8 @@ router.get("/:id/listOfKitas", (req, res) => {
       .then((parent) => {
         const kitaNames = parent.applications.map(application => {
           const kita = kitas.find(kita => kita._id.toString() === application.kitaId);
-          if (kita){
+          console.log(kita);
+          if (kita && kita != null){
             return {
               _id: application._id,
               kitaId: application.kitaId,

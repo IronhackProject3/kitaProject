@@ -11,7 +11,10 @@ const path         = require('path');
 
 
 mongoose
-  .connect('mongodb://localhost/kita-project', {useNewUrlParser: true})
+  // local connection
+  // .connect('mongodb://localhost/kita-project', {useNewUrlParser: true})
+  // heroku or local host connection
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/kita-project>', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
