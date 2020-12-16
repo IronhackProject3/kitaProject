@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { login } from '../../services/auth';
+import axios from 'axios';
+import { Link } from "react-router-dom";
 
 export default class Login extends Component {
   state = {
@@ -33,7 +35,19 @@ export default class Login extends Component {
         // successfully logged in
         // update the state for the parent component
         this.props.setUser(data);
-        this.props.history.push('/');
+        
+        axios
+        .get(`/api/parent/${data.parent}`)
+        .then((parent) => {
+          console.log(parent);
+          // trying to set the parent info across app so we can check which kitas
+          // he has applied to
+          this.props.setParent(parent);
+          this.props.history.push('/');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       }
     });
   };
@@ -68,7 +82,9 @@ export default class Login extends Component {
           )}
           <Button type='submit'>Login</Button>
         </Form>
+        <p>Don't have an account? <Link to={`/signup`}> Sign up</Link></p>
       </>
+      
     );
   }
 }
