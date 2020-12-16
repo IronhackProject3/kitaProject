@@ -7,7 +7,7 @@ export default class ApplyToKita extends Component {
     childFName: "",
     childSName: "",
     dob: "",
-    boyGirl: "",
+    boyGirl: "boy",
     Parent1FName: "",
     Parent1SName: "",
     Parent1Phone: "",
@@ -18,8 +18,6 @@ export default class ApplyToKita extends Component {
     Parent2Email: "",
     applications: "",
     homeLanguage: "",
-    specialNeeds: "",
-    specialNeedsDetails: "",
   };
 
   getData = () => {
@@ -71,7 +69,7 @@ export default class ApplyToKita extends Component {
       .then((response) => {
         // console.log(response);
 
-        this.props.setUserParent(response.data._id);
+        // this.props.setUserParent(response.data._id);
         this.props.history.push(`/`);
       });
   };
@@ -143,7 +141,7 @@ export default class ApplyToKita extends Component {
                   custom
                   name="boyGirl"
                   onChange={this.handleChange}
-                  value={this.state.type}
+                  value={this.state.boyGirl}
                 >
                   <option value="boy">Boy</option>
                   <option value="girl">Girl</option>
@@ -245,7 +243,6 @@ export default class ApplyToKita extends Component {
                 <Form.Control
                   as="select"
                   multiple
-                  // value={this.state.homeLanguage}
                   name="homeLanguage"
                   onChange={this.handleChange}
                   required
@@ -256,27 +253,6 @@ export default class ApplyToKita extends Component {
                     </option>
                   ))}
                 </Form.Control>
-              </Form.Group>
-
-              <Form.Group controlId="specialNeeds">
-                <Form.Check
-                  type="checkbox"
-                  name="specialNeeds"
-                  label="Child has special needs"
-                />
-              </Form.Group>
-
-              <Form.Group controlId="specialNeedsDetails">
-                <Form.Label>Special needs details</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  value={this.state.specialNeedsDetails}
-                  name="specialNeedsDetails"
-                  onChange={this.handleChange}
-                  placeholder="Details of special needs"
-                  rows={3}
-                  readOnly
-                />
               </Form.Group>
 
               <Button variant="primary" type="submit">

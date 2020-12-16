@@ -19,8 +19,8 @@ const parentSchema = new Schema({
     kitaId : String,
     date: { type: Date, default: Date.now },
     kitaPriority: Number,
-    ParentPriority: Number
-     }],
+    parentPriority: Number
+  }],
   homeLanguage: Array,
   // specialNeeds: Boolean,
   specialNeedsDetails: String,

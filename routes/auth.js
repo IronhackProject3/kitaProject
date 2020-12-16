@@ -58,6 +58,7 @@ router.post('/login', (req, res) => {
       if (err) {
         return res.status(500).json({ message: 'Error while attempting to login' })
       }
+      console.log('login', user.parent)
       return res.status(200).json(user);
     })
   })(req, res)
@@ -69,6 +70,7 @@ router.delete('/logout', (req, res) => {
 })
 
 router.get('/loggedin', (req, res) => {
+  console.log('login', req.user)
   res.json(req.user);
 })
 

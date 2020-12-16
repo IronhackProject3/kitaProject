@@ -21,8 +21,7 @@ class App extends React.Component {
   }
 
   state = {
-    user: this.props.user,
-    parent: null
+    user: this.props.user
   }
 
   setUser = user => {
@@ -40,29 +39,13 @@ class App extends React.Component {
     })
   }
 
-  setUserParent = parent => {
-    this.setState({
-      user: {
-        ...this.state.user,
-        parent: parent
-      }
-    })
-  }
-  // trying to get the parent info across the app
-  setParent = parent => {
-    this.setState({
-      parent: parent
-    })
-  }
-
-
   render() {
     return (
       <Container fluid>
         <Navbar setUser={this.setUser} user={this.state.user} />
         <Switch>
           <Route exact path="/signup" render={props => <Signup setUser={this.setUser} {...props} />} />
-          <Route exact path="/login" render={props => <Login setUser={this.setUser} setParent={this.setParent} {...props} />} />
+          <Route exact path="/login" render={props => <Login setUser={this.setUser} {...props} />} />
 
           <Route exact path="/" component={Kitas} />
           <Route exact path="/kitas/applications" render={props => <ListofParents user={this.state.user} {...props} />} />
@@ -72,9 +55,9 @@ class App extends React.Component {
           <Route exact path="/AddKita" render={props => <AddKita setUserKita={this.setUserKita} {...props} />} />
           
           <Route exact path="/addProfile" render={props => <ApplyToKita setUserParent={this.setUserParent} {...props} user={this.state.user} />} />
-          <Route exact path="/kitas/:id/signup" render={props => <ApplyToKita setUserParent={this.setUserParent} {...props} user={this.state.user} />} />
+          <Route exact path="/kitas/:id/signup" render={props => <ApplyToKita {...props} user={this.state.user} />} />
           <Route exact path="/parents/:id/edit" component={EditApplication} />
-          <Route exact path="/parents/applications" render={props => <ListOfKitas {...props} parent={this.state.parent} />} />
+          <Route exact path="/parents/applications" render={props => <ListOfKitas user={this.state.user} {...props} />} />
 
           <Route component={this.NotFound} />
         </Switch>

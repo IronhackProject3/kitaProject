@@ -36,9 +36,10 @@ export default class KitaDetails extends Component {
     const kitaId = this.props.match.params.id;
 
     axios
-      .post(`/api/parent/${this.props.user.parent}/addApplication`, {
+      .post(`/api/parent/${this.props.user.parent._id}/addApplication`, {
         kitaId: kitaId,
-        kitaPriority: '',
+        kitaPriority: 0,
+        parentPriority: 0,
         date: new Date().toString()
       })
       .then((response) => {
@@ -123,6 +124,12 @@ export default class KitaDetails extends Component {
             </>
           ) : this.props.user && this.props.user.type === 'parent' && this.props.user.parent ? (
             <>
+            <Button variant="primary">
+              {/* display if userid corrsponds to parent and DOES exist in the parents table and kitaId is not in the parent applications array */}
+              <Link to={`/kitas/${this.state.kita._id}/signup`}>
+                Edit application before applying to {this.state.kita.kitaName}
+              </Link>
+            </Button>
             </>
           ) : (
             <>
@@ -130,29 +137,7 @@ export default class KitaDetails extends Component {
          )}
 
 
-            
-            
-            <br /><br />
 
-            {this.props.user.parent && (
-              <Button variant="primary" onClick={this.oneClickApplyToKita}>
-                {/* display if userid corrsponds to parent and DOES NOT exist in the parents table and kitaId is not in the parent applications array*/}
-                {/* <Link to={`/kitas/${this.state.kita._id}/signup`}> Apply to {this.state.kita.kitaName} with 1 click</Link>  */}
-                Apply to {this.state.kita.kitaName} with 1 click
-              </Button>
-            )}
-
-            <br />
-            <br />
-
-            <Button variant="primary">
-              {/* display if userid corrsponds to parent and DOES exist in the parents table and kitaId is not in the parent applications array */}
-              <Link to={`/kitas/${this.state.kita._id}/signup`}>
-                Edit application before applying to {this.state.kita.kitaName}
-              </Link>
-            </Button>
-            <br />
-            <br />
 
             <Button variant="primary">
               {/* display if userid corrsponds to parent and DOES exist in the parents table and kitaId is not in the parent applications array */}
