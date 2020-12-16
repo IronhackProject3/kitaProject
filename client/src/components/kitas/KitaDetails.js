@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import ListofParents from "./ListofParents"
 
 export default class KitaDetails extends Component {
   state = {
@@ -22,7 +23,7 @@ export default class KitaDetails extends Component {
         });
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
         if (err.response.status === 404) {
           this.setState({
             error: "Sorry - Kita Not found 🤷‍♀️ 🤷‍♂️",
@@ -59,6 +60,7 @@ export default class KitaDetails extends Component {
   }
 
   render() {
+    console.log(this.state.kita)
     return (
       <div>
         {this.state.kita && (
@@ -96,8 +98,6 @@ export default class KitaDetails extends Component {
               src={`https://www.google.com/maps?q=${this.state.kita.Address}&output=embed`}
             ></iframe>
             <br />
-
-
 
             {!this.props.user ? (
             <>
