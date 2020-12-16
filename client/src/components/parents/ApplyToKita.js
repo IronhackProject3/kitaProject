@@ -98,12 +98,14 @@ export default class ApplyToKita extends Component {
   
   
   render() {
-    console.log(this.props.match.params.id)
+    console.log('line 101 yadda',   this.props.match.params.id) // id of kita being applied to 
+    // logic to use here: if the current user id is in parents._id do a short add, otherwise do the full list below
+    // in the short add push the basic details to parents(loggedin user).applications
+   
+    if (1 == 3 ) {
+   
     return (
       <div>
-
-
-
     {this.state.kita && (
       <>
 
@@ -122,9 +124,6 @@ export default class ApplyToKita extends Component {
         <Form.Text className="text-muted">
         </Form.Text>
       </Form.Group>
-
-
-
         <Form.Group controlId="childSName">
           <Form.Control type="text"
                       value={this.state.childSName} 
@@ -244,8 +243,6 @@ export default class ApplyToKita extends Component {
           </Form.Text>
         </Form.Group>
 
-
-
           <Form.Group controlId="homeLanguage">
             <Form.Label>Home langauge</Form.Label>
               <Form.Control 
@@ -260,9 +257,6 @@ export default class ApplyToKita extends Component {
                 ))}
               </Form.Control>
           </Form.Group>
-
-
-
 
           <Form.Group controlId="specialNeeds">
             <Form.Check type="checkbox" name="specialNeeds" label="Child has special needs" />
@@ -287,5 +281,20 @@ export default class ApplyToKita extends Component {
     )}
   </div>
 )
+
+} else{
+  // short add here
+  return(
+    <div>
+      <h4>Apply to  kita  {this.state.kita.kitaName}</h4>
+      
+
+          <Button variant="primary" type="submit">
+          Submit your current application data to //{this.state.kita.kitaName}
+          </Button>
+      
+</div>
+  )
+}
 }
 }
