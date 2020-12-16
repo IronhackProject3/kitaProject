@@ -42,7 +42,7 @@ export default class Login extends Component {
           console.log(parent);
           // trying to set the parent info across app so we can check which kitas
           // he has applied to
-          this.props.setParent(parent);
+          this.props.setParent(parent.data);
           this.props.history.push('/');
         })
         .catch((err) => {

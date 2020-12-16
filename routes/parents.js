@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Parent = require("../models/Parent");
 const User = require("../models/User");
-const ObjectId = require('mongoose').Types.ObjectId;
+const Kita = require("../models/Kita");
 
 router.get("/", (req, res) => {
 
@@ -39,10 +39,10 @@ router.post("/addParent", (req, res) => {
     specialNeedsDetails,
   } = req.body.parentInfo;
 
-  const { test } = req.body.kitaInfo;
-
+  // const { test } = req.body.kitaInfo;
   const owner = req.user._id;
 
+  // add a new parent application
   Parent.create({
     childFName,
     childSName,
@@ -68,6 +68,7 @@ router.post("/addParent", (req, res) => {
     specialNeedsDetails,
   })
     .then((parent) => {
+      // adding parent ID into Users table
       User.findByIdAndUpdate(
         owner,
         {
@@ -119,22 +120,17 @@ router.post("/:id/addApplication", (req, res) => {
     });
 });
 
-// trying to set the parent to state across the app (setParent)
-// added axios call on Login.js --> manage to get the 
-// parent ID on login but dont manage to get the match on MongoDB
+// Set the parent to state across the app (setParent)
 router.get("/:id", (req, res) => {
   const parentId = req.params.id;
-console.log(parentId);
+  console.log("parent Id", parentId);
   Parent
     .findById(
-      parentId,
-      { new: true }
+      parentId
     )
-    //.find({"_id" : mongoose.Types.ObjectId(parentId)})
-    //.findById(new ObjectId(parentId))
     .then((result) => {
-      console.log(result.data);
-      res.status(201).json(result.data);
+      console.log(result); // was trying result.data
+      res.status(201).json(result);
     })
     .catch((err) => {
       console.log(err);
@@ -143,5 +139,38 @@ console.log(parentId);
 });
 
 
+// Get a list of all kitas a parent has applied for
+router.get("/:id/listOfKitas", (req, res) => {
+  const parentId = req.params.id;
+  console.log("parent Id to get a list of kitas", parentId);
+  Kita.find()
+    .then(kitas => {
+      Parent
+      .findById(
+        parentId
+      )
+      // .populate()
+      .then((parent) => {
+        console.log(parent);
+
+        const kitaNames = parent.applications.map(application => {
+          console.log(application);
+          const kita = kitas.find(kita => kita._id.toString() === application.kitaId);
+          if (kita){
+            console.log(kita);
+            return kita.kitaName;
+          }
+        })
+        res.status(201).json(kitaNames);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.json(err);
+      });
+    })
+    .catch(err => {
+      res.json(err);
+    })
+});
 
 module.exports = router;
