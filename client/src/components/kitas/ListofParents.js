@@ -18,7 +18,7 @@ getData = () => {
       return {...element, applications: element.applications.filter(applicant => {
         console.log(applicant) 
       
-        return  applicant.kitaId == this.props.user.kita })}  // true if the ids match  - filter further by adding conditions 
+        return  applicant.kitaId == this.props.user.kita._id })}  // true if the ids match  - filter further by adding conditions 
     })
     const filteredApplication = obj.filter(applicant => applicant.applications.length > 0) //filtering by populated or not
    
