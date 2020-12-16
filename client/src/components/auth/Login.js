@@ -36,18 +36,7 @@ export default class Login extends Component {
         // update the state for the parent component
         this.props.setUser(data);
         
-        axios
-        .get(`/api/parent/${data.parent}`)
-        .then((parent) => {
-          console.log(parent);
-          // trying to set the parent info across app so we can check which kitas
-          // he has applied to
-          this.props.setParent(parent.data);
-          this.props.history.push('/');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        this.props.history.push('/');
       }
     });
   };

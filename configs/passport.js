@@ -8,7 +8,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id)
+  User.findById(id).populate('parent').populate('kita')
     .then(dbUser => {
       done(null, dbUser);
     })
@@ -19,7 +19,7 @@ passport.deserializeUser((id, done) => {
 
 passport.use(
   new LocalStrategy((username, password, done) => {
-    User.findOne({ username: username })
+    User.findOne({ username: username }).populate('parent').populate('kita')
       .then(found => {
         if (found === null) {
           done(null, false, { message: 'Wrong Credentials' })
