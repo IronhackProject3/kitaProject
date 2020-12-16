@@ -9,7 +9,7 @@ import EditKita from "./components/kitas/EditKita";
 import EditApplication from "./components/parents/editApplication";
 import { Route, Switch } from "react-router-dom";
 import Signup from './components/auth/Signup';
-import ListOfKitas from './components/parents/ListOfKitas';
+import ListOfKitas from './components/parent/ListOfKitas';
 import Login from './components/auth/Login';
 import { Container } from "react-bootstrap";
 import ListofParents from "./components/kitas/ListofParents";
