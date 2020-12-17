@@ -42,12 +42,14 @@ export default class Kitas extends Component {
       || kita.Postcode.includes(this.state.search)
     });
     
-    
       // console.log("filtered kitas", kitas);
 
     return (
       <>
-        <Form>
+      <div className="header">
+        <h1 className="tagline">Easily search and apply to kitas in Berlin using KitaFinder</h1>
+      </div>
+        <Form className="search-form">
           <Form.Group controlId="SearchKita">
             <Form.Control 
               type="text" 
@@ -58,21 +60,24 @@ export default class Kitas extends Component {
             />
           </Form.Group>
         </Form>
-
-        <h4>Kitas</h4>
-
-        {/* <Button variant="primary">
-          <Link to="AddKita/"> Add your Kita </Link>
-        </Button> */}
-          
+      
+      <div className="search-results">
+        <h1>Kitas</h1>
           {kitas.map(kita => (
-              <div key={kita._id}>
+              <div className="kita-names" key={kita._id}>
                 <p>
-                  <Link to={`/kitas/${kita._id}`}>{kita.kitaName}</Link>,  {kita.Address},  {kita.Postcode}
+                  <Link to={`/kitas/${kita._id}`}>{kita.kitaName}</Link>
+                  ,  {kita.Address}
+                  ,  {kita.Postcode}
+                  {this.props.user && this.props.user.parent && this.props.user.parent.applications && this.props.user.parent.applications.find(app => app.kitaId === kita._id.toString()) &&
+                    (<span>&nbsp;&nbsp;&nbsp;Applied</span>)
+                  }
                 </p>
               </div>
             )
           )}
+      </div>
+
       </>
     )
   }

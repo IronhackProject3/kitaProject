@@ -6,6 +6,50 @@
   margin-bottom: 20px;
 }
 
-input[type=text] {
+.search-form input[type=text] {
   margin-top: 20px;
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+  margin-top: -20px;
+  height: 5vh;
+  font-size: 1.6vw;
+}
+
+.header {
+  background-image: url('https://res.cloudinary.com/dfypp9c6h/image/upload/v1608191114/kita-project/Kita-header_c7uzwt.jpg');
+  background-size: cover;
+  height: 50vh;
+}
+
+.header img {
+  z-index: -1;
+}
+
+.tagline {
+  color: white;
+  width: 40%;
+  line-height: 3.8vw;
+  font-size: 3vw;
+  font-weight: bold;
+  padding: 20px 0 0 30px;
+}
+
+.search-results {
+  display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+  align-content: stretch;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.kita-names {
+  /* display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: stretch; */
 }

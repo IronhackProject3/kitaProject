@@ -12,11 +12,9 @@ export default class ApplyToKita extends Component {
     Parent1SName: "",
     Parent1Phone: "",
     Parent1Email: "",
-    Parent2FName: "",
-    Parent2SName: "",
-    Parent2Phone: "",
-    Parent2Email: "",
-    applications: "",
+    ParentAddress: "",
+    ParentPostcode: "",
+    applications: [],
     homeLanguage: "",
   };
 
@@ -69,7 +67,7 @@ export default class ApplyToKita extends Component {
       .then((response) => {
         // console.log(response);
 
-        // this.props.setUserParent(response.data._id);
+        this.props.setUserParent(response.data);
         this.props.history.push(`/`);
       });
   };
@@ -98,7 +96,7 @@ export default class ApplyToKita extends Component {
       <div>
         {this.state.kita && (
           <>
-            <h4>Apply to {this.state.kita.kitaName}</h4>
+            {this.state.kita.kitaName ? (<h4>Apply to {this.state.kita.kitaName}</h4>) : (<h4>Create Application</h4>)}
 
             <Form onSubmit={this.handleSubmit}>
               <Form.Group controlId="childFName">
@@ -149,7 +147,7 @@ export default class ApplyToKita extends Component {
               </Form.Group>
 
               <Form.Group controlId="Parent1FName">
-                <Form.Label>First Parent / Guardian </Form.Label>
+                <Form.Label>Parent / Guardian </Form.Label>
                 <Form.Control
                   type="text"
                   value={this.state.Parent1FName}
@@ -193,47 +191,24 @@ export default class ApplyToKita extends Component {
                 <Form.Text className="text-muted"></Form.Text>
               </Form.Group>
 
-              <Form.Group controlId="Parent2FName">
-                <Form.Label>Second Parent / Guardian </Form.Label>
+              <Form.Group controlId="ParentAddress">
                 <Form.Control
                   type="text"
-                  value={this.state.Parent2FName}
-                  name="Parent2FName"
+                  value={this.state.ParentAddress}
+                  name="ParentAddress"
                   onChange={this.handleChange}
-                  placeholder="First Name"
+                  placeholder="Home Address"
                 />
                 <Form.Text className="text-muted"></Form.Text>
               </Form.Group>
 
-              <Form.Group controlId="Parent2SName">
+              <Form.Group controlId="ParentPostcode">
                 <Form.Control
                   type="text"
-                  value={this.state.Parent2SName}
-                  name="Parent2SName"
+                  value={this.state.ParentPostcode}
+                  name="ParentPostcode"
                   onChange={this.handleChange}
-                  placeholder="Last Name"
-                />
-                <Form.Text className="text-muted"></Form.Text>
-              </Form.Group>
-
-              <Form.Group controlId="Parent2Phone">
-                <Form.Control
-                  type="text"
-                  value={this.state.Parent2Phone}
-                  name="Parent2Phone"
-                  onChange={this.handleChange}
-                  placeholder="Phone number"
-                />
-                <Form.Text className="text-muted"></Form.Text>
-              </Form.Group>
-
-              <Form.Group controlId="Parent2Email">
-                <Form.Control
-                  type="text"
-                  value={this.state.Parent2Email}
-                  name="Parent2Email"
-                  onChange={this.handleChange}
-                  placeholder="Email Address"
+                  placeholder="Postcode"
                 />
                 <Form.Text className="text-muted"></Form.Text>
               </Form.Group>
@@ -256,7 +231,8 @@ export default class ApplyToKita extends Component {
               </Form.Group>
 
               <Button variant="primary" type="submit">
-                Submit your application to {this.state.kita.kitaName}
+              {this.state.kita.kitaName ? (<>Submit your application to {this.state.kita.kitaName}</>) : (<>Submit</>)}
+                
               </Button>
             </Form>
           </>

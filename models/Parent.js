@@ -10,10 +10,8 @@ const parentSchema = new Schema({
   Parent1SName: String,
   Parent1Phone: String,
   Parent1Email: String,
-  Parent2FName: String,
-  Parent2SName: String,
-  Parent2Phone: String,
-  Parent2Email: String,
+  ParentAddress: String,
+  ParentPostcode: String,
   // kitaId: String,
   applications:  [{
     kitaId : String,
@@ -22,8 +20,6 @@ const parentSchema = new Schema({
     parentPriority: Number
   }],
   homeLanguage: Array,
-  // specialNeeds: Boolean,
-  specialNeedsDetails: String,
 });
 
 const Parent = mongoose.model('Parent', parentSchema); 
