@@ -50,6 +50,23 @@ class App extends React.Component {
     }
   }
 
+  setUserParentApplication = application => {
+    if(!this.state.parent){
+      this.setState({
+        user: {
+          ...this.state.user,
+          parent: {
+            ...this.state.user.parent,
+            applications: [
+              ...this.state.user.parent.applications,
+              application
+            ]
+          }
+        }
+      })
+    }
+  }
+
   render() {
     return (
       <Container fluid>
@@ -58,15 +75,15 @@ class App extends React.Component {
           <Route exact path="/signup" render={props => <Signup setUser={this.setUser} {...props} />} />
           <Route exact path="/login" render={props => <Login setUser={this.setUser} {...props} />} />
 
-          <Route exact path="/" component={Kitas} />
+          <Route exact path="/" render={props => <Kitas user={this.state.user} {...props} />} />
           <Route exact path="/kitas/applications" render={props => <ListofParents user={this.state.user} {...props} />} />
-          <Route exact path="/kitas/:id" render={props => <KitaDetails user={this.state.user} {...props} />} />
+          <Route exact path="/kitas/:id" render={props => <KitaDetails user={this.state.user} setUserParentApplication={this.setUserParentApplication} {...props} />} />
           
           <Route exact path="/kitas/:id/edit" component={EditKita} />
           <Route exact path="/AddKita" render={props => <AddKita setUserKita={this.setUserKita} {...props} />} />
           
           <Route exact path="/addProfile" render={props => <ApplyToKita setUserParent={this.setUserParent} {...props} user={this.state.user} />} />
-          <Route exact path="/kitas/:id/signup" render={props => <ApplyToKita {...props} user={this.state.user} />} />
+          <Route exact path="/kitas/:id/signup" render={props => <ApplyToKita setUserParent={this.setUserParent} {...props} user={this.state.user} />} />
           <Route exact path="/parents/:id/edit" component={EditApplication} />
           <Route exact path="/parents/applications" render={props => <ListOfKitas user={this.state.user} {...props} />} />
 

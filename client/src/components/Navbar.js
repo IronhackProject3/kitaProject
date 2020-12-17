@@ -44,13 +44,19 @@ export default function Navbar(props) {
               <Nav.Link as={Link} to='/' onClick={() => handleLogout(props)}>Logout</Nav.Link>
               {/* /kitas/${this.state.kita._id}/signup */}
             </>
-          ) : props.user && props.user.type === 'parent' && props.user.parent ? (
+          ) : props.user && props.user.type === 'parent' && props.user.parent && props.user.parent.applications && props.user.parent.applications.length > 0 ? (
             <>
               <Nav.Link as={Link} to="/parents/myProfile">Edit Profile</Nav.Link>
               <Nav.Link as={Link} to="/parents/applications">List of Applications</Nav.Link>
               <Nav.Link as={Link} to='/' onClick={() => handleLogout(props)}>Logout</Nav.Link>
             </>
-          ) : (
+          ) : props.user && props.user.type === 'parent' && props.user.parent ? (
+            <>
+              <Nav.Link as={Link} to="/parents/myProfile">Edit Profile</Nav.Link>
+              <Nav.Link as={Link} to='/' onClick={() => handleLogout(props)}>Logout</Nav.Link>
+            </>
+          ) : 
+          (
             <>
               <Nav.Link as={Link} to='/signup'>Signup</Nav.Link>
               <Nav.Link as={Link} to='/login'>Login</Nav.Link>
