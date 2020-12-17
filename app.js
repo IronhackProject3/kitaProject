@@ -14,7 +14,7 @@ mongoose
   // local connection
   // .connect('mongodb://localhost/kita-project', {useNewUrlParser: true})
   // heroku or local host connection
-  .connect(process.env.MONGODB_URI || 'mongodb://localhost/kita-project>', {useNewUrlParser: true})
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/kita-project', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -73,14 +73,15 @@ app.use(require('node-sass-middleware')({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 // local config
-//app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+// Heroku config
 app.use(express.static(path.join(__dirname, "/client/build")));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Kita Finder';
 
 
 const kitas = require('./routes/kitas');

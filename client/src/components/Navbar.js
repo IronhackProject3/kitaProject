@@ -13,7 +13,9 @@ const handleLogout = props => {
 }
 
 export default function Navbar(props) {
+  // console.log("props at navbar", props);
   return (
+    
   
     <Bootnav collapseOnSelect expand="sm" bg='primary'>
       <Bootnav.Brand>

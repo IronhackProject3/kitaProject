@@ -8,4 +8,30 @@
 
 input[type=text] {
   margin-top: 20px;
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+  margin-top: -20px;
+}
+
+.header {
+  background-image: url('https://res.cloudinary.com/dfypp9c6h/image/upload/v1608191114/kita-project/Kita-header_c7uzwt.jpg');
+  background-size: cover;
+  height: 50vh;
+}
+
+.header img {
+  z-index: -1;
+}
+
+.tagline {
+  color: white;
+  width: 40%;
+  line-height: 3.8vw;
+  font-size: 3vw;
+  font-weight: bold;
+  padding: 20px 0 0 30px;
+}
+
+.search-results {
 }
