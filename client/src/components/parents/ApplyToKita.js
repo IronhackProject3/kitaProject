@@ -96,7 +96,7 @@ export default class ApplyToKita extends Component {
       <div>
         {this.state.kita && (
           <>
-            <h4>Apply to {this.state.kita.kitaName}</h4>
+            {this.state.kita.kitaName ? (<h4>Apply to {this.state.kita.kitaName}</h4>) : (<h4>Create Application</h4>)}
 
             <Form onSubmit={this.handleSubmit}>
               <Form.Group controlId="childFName">
@@ -231,7 +231,8 @@ export default class ApplyToKita extends Component {
               </Form.Group>
 
               <Button variant="primary" type="submit">
-                Submit your application to {this.state.kita.kitaName}
+              {this.state.kita.kitaName ? (<>Submit your application to {this.state.kita.kitaName}</>) : (<>Submit</>)}
+                
               </Button>
             </Form>
           </>

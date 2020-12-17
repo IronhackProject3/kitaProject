@@ -39,16 +39,17 @@
   display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: center;
-	align-content: stretch;
+	justify-content: center;
+  align-content: stretch;
+  margin: 0 auto;
+  width: 50%;
 }
 
 .kita-names {
-  display: flex;
+  /* display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
 	justify-content: flex-start;
 	align-items: flex-start;
-	align-content: stretch;
+	align-content: stretch; */
 }

@@ -42,7 +42,6 @@ export default class Kitas extends Component {
       || kita.Postcode.includes(this.state.search)
     });
     
-    
       // console.log("filtered kitas", kitas);
 
     return (
@@ -67,7 +66,12 @@ export default class Kitas extends Component {
           {kitas.map(kita => (
               <div className="kita-names" key={kita._id}>
                 <p>
-                  <Link to={`/kitas/${kita._id}`}>{kita.kitaName}</Link>,  {kita.Address},  {kita.Postcode}
+                  <Link to={`/kitas/${kita._id}`}>{kita.kitaName}</Link>
+                  ,  {kita.Address}
+                  ,  {kita.Postcode}
+                  {this.props.user && this.props.user.parent && this.props.user.parent.applications && this.props.user.parent.applications.find(app => app.kitaId === kita._id.toString()) &&
+                    (<span>&nbsp;&nbsp;&nbsp;Applied</span>)
+                  }
                 </p>
               </div>
             )
