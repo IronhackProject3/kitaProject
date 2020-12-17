@@ -140,6 +140,43 @@ componentDidMount() {
             checked={this.state.englishAtHome}
             onChange={this.handleInputChange} />
         </label>
+
+
+        <label>
+          Turkish at home 
+          <input
+            name="englishAtHome"
+            type="checkbox"
+            // checked={this.state.englishAtHome}
+            // onChange={this.handleInputChange} 
+            />
+        </label>
+
+
+        <label>
+          Russian at home 
+          <input
+            name="englishAtHome"
+            type="checkbox"
+            // checked={this.state.englishAtHome}
+            // onChange={this.handleInputChange}
+            />
+        </label>
+
+
+        <label>
+          Spanish at home 
+          <input
+            name="englishAtHome"
+            type="checkbox"
+            // checked={this.state.englishAtHome}
+            // onChange={this.handleInputChange}
+             />
+        </label>
+
+
+
+
         </form> 
 
         <ul>
