@@ -93,50 +93,65 @@ export default class ListofParents extends Component {
     console.log(this.state.englishAtHome);
 
     return (
-      <Container>
-        <Row className="justify-content-md-center">
-          <Col md="auto">
-            <h1 className="parents-h1">List of Applicants</h1>
-          </Col>
-        </Row>
+      <div>
+        <h1>List of Applicants</h1>
+        <form class="form-horizontal">
+         <div>
 
-        <Row className="justify-content-md-center">
-          <Col md="auto">
-            <form>
-              <label>
-                <span className="english">English at home </span>&nbsp;&nbsp;
-                <input
-                  name="englishAtHome"
-                  type="checkbox"
-                  checked={this.state.englishAtHome}
-                  onChange={this.handleInputChange}
-                />
-              </label>
-            </form>
-          </Col>
-        </Row>
+        <label>
+          English at home &nbsp;
+          <input
+            name="englishAtHome"
+            type="checkbox"
+            checked={this.state.englishAtHome}
+            onChange={this.handleInputChange} />
+        </label>
 
-        <Row className="justify-content-md-center">
-          <Col md="auto">
-          <ul>
-          {englishFilterd.map((parent) => {
-            return (
-              <li className="applicants" data-gender={parent.boyGirl}>
-                {parent.childFName}, born{" "}
-                {parent.dob
-                  .split("T")[0]
-                  .split("-")
-                  .reduce((t, v) => (t = v + "." + t))}
-                , applied {parent.applications[0].date},{" "}
-                {parent.homeLanguage.map((language) => allLanguages[language])}{" "}
-              </li>
-            );
-          })}
-        </ul>
-          </Col>
-        </Row>
-        
-      </Container>
+        </div> <div>
+        <label>
+          Turkish at home  &nbsp;
+          <input
+            name="englishAtHome"
+            type="checkbox"
+            // checked={this.state.englishAtHome}
+            // onChange={this.handleInputChange} 
+            />
+        </label>
+        </div> <div>
+
+        <label>
+          Russian at home  &nbsp;
+          <input
+            name="englishAtHome"
+            type="checkbox"
+            // checked={this.state.englishAtHome}
+            // onChange={this.handleInputChange}
+            />
+        </label>
+
+        </div> <div>
+        <label>
+          Spanish at home  &nbsp;
+          <input
+            name="englishAtHome"
+            type="checkbox"
+            // checked={this.state.englishAtHome}
+            // onChange={this.handleInputChange}
+             />
+        </label>
+        </div> 
+
+        </form> 
+
+        <ul>
+         {englishFilterd.map(parent => {
+           return (<li data-gender={parent.boyGirl}>{parent.childFName},  born {parent.dob.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)},  applied  {parent.applications[0].date.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)}  ,  {parent.homeLanguage.map(language => allLanguages[language])}  </li>)
+
+
+         })}
+          </ul>
+
+      </div>
     );
   }
 }

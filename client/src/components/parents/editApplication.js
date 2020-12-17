@@ -1,47 +1,48 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 
-export default class ApplyToKita extends Component {
+
+export default class EditProfile extends Component {
   state = {
-    childFName: "",
-    childSName: "",
-    dob: "",
-    boyGirl: "boy",
-    Parent1FName: "",
-    Parent1SName: "",
-    Parent1Phone: "",
-    Parent1Email: "",
-    ParentAddress: "",
-    ParentPostcode: "",
-    applications: "",
-    homeLanguage: "",
+    childFName: this.props.user.parent.childFName,
+    childSName: this.props.user.parent.childSName,
+    dob: this.props.user.parent.dob,
+    boyGirl: this.props.user.parent.boyGirl,
+    Parent1FName: this.props.user.parent.Parent1FName,
+    Parent1SName: this.props.user.parent.Parent1SName,
+    Parent1Phone: this.props.user.parent.Parent1Phone,
+    Parent1Email: this.props.user.parent.Parent1Email,
+    ParentAddress: this.props.user.parent.ParentAddress,
+    ParentPostcode: this.props.user.parent.ParentPostcode,
+    applications:this.props.user.parent.applications,
+    homeLanguage: this.props.user.parent.homeLanguage
   };
 
-  getData = () => {
-    const id = this.props.match.params.id;
-    console.log("KitaID is", id);
-    axios
-      .get(`/api/kitas/${id}`)
-      .then((response) => {
-        // console.log("response from details", response);
-        this.setState({
-          kita: response.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err.response);
-        if (err.response.status === 404) {
-          this.setState({
-            error: "Sorry - Kita Not found 🤷‍♀️ 🤷‍♂️",
-          });
-        }
-      });
-  };
+  // getData = () => {
+  //   const id = this.props.match.params.id;
+  //   console.log("KitaID is", id);
+  //   axios
+  //     .get(`/api/kitas/${id}`)
+  //     .then((response) => {
+  //       // console.log("response from details", response);
+  //       this.setState({
+  //         kita: response.data,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.response);
+  //       if (err.response.status === 404) {
+  //         this.setState({
+  //           error: "Sorry - Profile Not found 🤷‍♀️ 🤷‍♂️",
+  //         });
+  //       }
+  //     });
+  // };
 
-  componentDidMount = () => {
-    this.getData();
-  };
+  // componentDidMount = () => {
+  //   this.getData();
+  // };
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -57,18 +58,24 @@ export default class ApplyToKita extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     let parentInfo = this.state;
-    let kitaInfo = { kitaId: this.props.match.params.id, kitaPriority: "" }; 
-    // console.log("67", kitaInfo);
+    console.log(this.props.user.parent._id);
     axios
-      .post("/api/parent/addParent", {
-        parentInfo: parentInfo,
-        kitaInfo: kitaInfo,
+      .put(`/api/parent/${this.props.user.parent._id}/EditApplication`, {
+        childFName: this.state.childFName,
+        childSName: this.state.childSName,
+        dob: this.state.dob,
+        boyGirl: this.state.boyGirl,
+        Parent1FName: this.state.Parent1FName,
+        Parent1SName: this.state.Parent1SName,
+        Parent1Phone: this.state.Parent1Phone,
+        Parent1Email: this.state.Parent1Email,
+        ParentAddress: this.state.ParentAddress,
+        ParentPostcode: this.state.ParentPostcode,
+        homeLanguage: this.state.homeLanguage
       })
       .then((response) => {
-        // console.log(response);
-
-        // this.props.setUserParent(response.data._id);
-        this.props.history.push(`/`);
+        console.log(response);
+         this.props.history.push(`/`);
       });
   };
 
@@ -91,12 +98,11 @@ export default class ApplyToKita extends Component {
   };
 
   render() {
-    console.log(this.props.match.params.id);
+    console.log(this.props.user);
     return (
       <div>
-        {this.state.kita && (
           <>
-            <h4>Apply to {this.state.kita.kitaName}</h4>
+            <h4>Edit your profile</h4>
 
             <Form onSubmit={this.handleSubmit}>
               <Form.Group controlId="childFName">
@@ -231,11 +237,10 @@ export default class ApplyToKita extends Component {
               </Form.Group>
 
               <Button variant="primary" type="submit">
-                Submit your application to {this.state.kita.kitaName}
+                Update your profile
               </Button>
             </Form>
           </>
-        )}
       </div>
     );
   }

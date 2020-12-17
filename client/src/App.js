@@ -83,8 +83,9 @@ class App extends React.Component {
           <Route exact path="/AddKita" render={props => <AddKita setUserKita={this.setUserKita} {...props} />} />
           
           <Route exact path="/addProfile" render={props => <ApplyToKita setUserParent={this.setUserParent} {...props} user={this.state.user} />} />
+          {/* <Route exact path="/addProfile" render={props => <ApplyToKita setUserParent={this.setUserParent} {...props} user={this.state.user} />} /> */}
           <Route exact path="/kitas/:id/signup" render={props => <ApplyToKita setUserParent={this.setUserParent} {...props} user={this.state.user} />} />
-          <Route exact path="/parents/:id/edit" component={EditApplication} />
+          <Route exact path="/parents/:id/edit" render={props => <EditApplication setUserParent={this.setUserParent} {...props} user={this.state.user} />} />
           <Route exact path="/parents/applications" render={props => <ListOfKitas user={this.state.user} {...props} />} />
 
           <Route component={this.NotFound} />
