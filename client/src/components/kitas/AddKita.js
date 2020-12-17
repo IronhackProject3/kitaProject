@@ -73,7 +73,7 @@ export default class AddKita extends Component {
       axios.post('/api/kitas/addKita',this.state)
       .then(response => {
         // console.log(response);
-        this.props.setUserKita(response.data._id);
+        this.props.setUserKita(response.data);
         this.props.history.push(`/kitas/${response.data._id}`);
         this.setState({
           imageURL: "",
