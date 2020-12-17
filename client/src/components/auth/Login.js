@@ -3,6 +3,8 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { login } from '../../services/auth';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import './Login.css';
+import { Container } from "react-bootstrap";
 
 export default class Login extends Component {
   state = {
@@ -43,8 +45,8 @@ export default class Login extends Component {
 
   render() {
     return (
-      <>
-        <h2>Login</h2>
+      <Container>
+        <h2 className="login">Login</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
             <Form.Label htmlFor='username'>Username: </Form.Label>
@@ -72,7 +74,7 @@ export default class Login extends Component {
           <Button type='submit'>Login</Button>
         </Form>
         <p>Don't have an account? <Link to={`/signup`}> Sign up</Link></p>
-      </>
+      </Container>
       
     );
   }

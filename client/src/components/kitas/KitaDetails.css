@@ -1,67 +1,48 @@
 .h1-details {
   width: 100%;
   text-align: center;
-  margin-top: 3vh;
+  margin: 3vh 0 5vh 0;
+  font-weight: bold;
 }
 
-.details-wrapper {
-  /* outline: 1px solid red; */
-  display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: flex-start;
-  align-content: space-around;
-  height: 75vh;
-  width: 80%;
-  margin: 0 auto;
-}
 
-.details-wrapper img{
+img{
   display: flex;
   box-shadow: rgba(0, 0, 0, 0.55) 0px 5px 15px;
 }
 
-.details-wrapper iframe {
+iframe {
   box-shadow: rgba(0, 0, 0, 0.55) 0px 5px 15px;
-}
-
-.left-div {
-  /* outline: 1px solid blue; */
-  width: 50%;
-  display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: flex-start;
-	align-content: space-around;
-
-}
-
-.right-div {
-  /* outline: 1px solid pink; */
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-content: stretch;
-  align-items: flex-start;
-  height: 65vh;
-  padding-left: 5vw;
-}
-
-
-.general-info {
-  /* outline: 1px solid green; */
-}
-
-.contact-info {
-  /* outline: 1px solid grey; */
-  margin-top: 10vh;
 }
 
 .apply-button {
   margin: 0 auto;
 }
 
+.details-h2 {
+  font-weight: bold;
+  font-size: 1.rem;
+}
 
+.p-details {
+  margin: 0px;
+  line-height: 2rem;
+  font-size: 1.2rem
+}
+
+.apply-kita-button {
+  margin-top: 40px;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.already-applied {
+  color: red;
+}
+
+@media screen and (max-width: 900px) {
+  
+  iframe {
+    margin: 5vh 0;
+  }
+}

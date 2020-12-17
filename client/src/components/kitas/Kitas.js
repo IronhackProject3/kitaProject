@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap'
 import './Kitas.css';
+import { Container, Row, Col } from "react-bootstrap";
 
 
 export default class Kitas extends Component {
@@ -46,9 +47,10 @@ export default class Kitas extends Component {
 
     return (
       <>
-      <div className="header">
-        <h1 className="tagline">Easily search and apply to kitas in Berlin using KitaFinder</h1>
-      </div>
+        <div className="header">
+          <h1 className="tagline">Easily search and apply to kitas in Berlin using KitaFinder</h1>
+        </div>
+
         <Form className="search-form">
           <Form.Group controlId="SearchKita">
             <Form.Control 
@@ -61,23 +63,29 @@ export default class Kitas extends Component {
           </Form.Group>
         </Form>
       
-      <div className="search-results">
-        <h1>Kitas</h1>
-          {kitas.map(kita => (
-              <div className="kita-names" key={kita._id}>
-                <p>
-                  <Link to={`/kitas/${kita._id}`}>{kita.kitaName}</Link>
-                  ,  {kita.Address}
-                  ,  {kita.Postcode}
-                  {this.props.user && this.props.user.parent && this.props.user.parent.applications && this.props.user.parent.applications.find(app => app.kitaId === kita._id.toString()) &&
-                    (<span>&nbsp;&nbsp;&nbsp;Applied</span>)
-                  }
-                </p>
-              </div>
-            )
-          )}
-      </div>
+        <Container>
+          <Row className="justify-content-md-center"> 
+            <Col md="auto"><h1 className="h1-kitas">Kitas</h1></Col>
+          </Row>
 
+          <Row className="justify-content-md-center"> 
+            <Col md="auto">
+              {kitas.map(kita => (
+                  <div key={kita._id}>
+                    <p className="kita-list">
+                      <Link to={`/kitas/${kita._id}`}>{kita.kitaName}</Link>
+                      ,  {kita.Address}
+                      ,  {kita.Postcode}
+                      {this.props.user && this.props.user.parent && this.props.user.parent.applications && this.props.user.parent.applications.find(app => app.kitaId === kita._id.toString()) &&
+                        (<span className="applied">&nbsp;&nbsp;&nbsp;Applied</span>)
+                      }
+                    </p>
+                  </div>
+                )
+              )}
+            </Col>
+          </Row>
+        </Container>
       </>
     )
   }

@@ -1,5 +1,16 @@
 .list-h1 {
-  width: 100%;
-  text-align: center;
-  margin-top: 3vh;
+  font-weight: bold;
+  margin: 20px 0 20px 0;
+}
+
+[data-rbd-droppable-context-id] {
+  width: 400px !important;
+  margin: 10px 0 0 0  !important;
+  background: lightblue !important;
+}
+
+[data-rbd-drag-handle-context-id] {
+  background: #007bff !important;
+  color: white !important;
+  font-weight: 500 !important;
 }

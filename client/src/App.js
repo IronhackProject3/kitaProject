@@ -50,22 +50,22 @@ class App extends React.Component {
     }
   }
 
-  setUserParentApplication = application => {
-    if(!this.state.parent){
-      this.setState({
-        user: {
-          ...this.state.user,
-          parent: {
-            ...this.state.user.parent,
-            applications: [
-              ...this.state.user.parent.applications,
-              application
-            ]
-          }
-        }
-      })
-    }
-  }
+  // setUserParentApplication = application => {
+  //   if(!this.state.parent){
+  //     this.setState({
+  //       user: {
+  //         ...this.state.user,
+  //         parent: {
+  //           ...this.state.user.parent,
+  //           applications: [
+  //             ...this.state.user.parent.applications,
+  //             application
+  //           ]
+  //         }
+  //       }
+  //     })
+  //   }
+  // }
 
   render() {
     return (
@@ -77,7 +77,7 @@ class App extends React.Component {
 
           <Route exact path="/" render={props => <Kitas user={this.state.user} {...props} />} />
           <Route exact path="/kitas/applications" render={props => <ListofParents user={this.state.user} {...props} />} />
-          <Route exact path="/kitas/:id" render={props => <KitaDetails user={this.state.user} setUserParentApplication={this.setUserParentApplication} {...props} />} />
+          <Route exact path="/kitas/:id" render={props => <KitaDetails user={this.state.user} setUserParent={this.setUserParent} {...props} />} />
           
           <Route exact path="/kitas/:id/edit" component={EditKita} />
           <Route exact path="/AddKita" render={props => <AddKita setUserKita={this.setUserKita} {...props} />} />

@@ -35,21 +35,36 @@
   padding: 20px 0 0 30px;
 }
 
-.search-results {
-  display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-  align-content: stretch;
+.center-list {
   margin: 0 auto;
-  width: 50%;
 }
 
-.kita-names {
-  /* display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: flex-start;
-	align-content: stretch; */
+.h1-kitas {
+  font-weight: bold;
+  margin: 10px 0 20px 0;
+}
+
+.applied {
+  color: red;
+}
+
+.kita-list {
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 900px) {
+  .tagline {
+    font-size: 35px;
+    width: 80%;
+    line-height: 1.2em;
+  }
+
+  .search-form input[type=text] {
+    font-size: 16px;
+  }
+  
+  .search-results {
+    width: 95%;
+  }
+
 }
