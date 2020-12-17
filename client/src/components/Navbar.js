@@ -46,7 +46,8 @@ export default function Navbar(props) {
             </>
           ) : props.user && props.user.type === 'parent' && props.user.parent && props.user.parent.applications && props.user.parent.applications.length > 0 ? (
             <>
-              <Nav.Link as={Link} to="/parents/myProfile">Edit Profile</Nav.Link>
+              <Nav.Link as={Link} to={`/parents/${props.user._id}/edit`}>Edit Profile</Nav.Link>
+              {/* <Nav.Link as={Link} to="/parents/myProfile">Edit Profile</Nav.Link>  thursday new version one line up*/}
               <Nav.Link as={Link} to="/parents/applications">List of Applications</Nav.Link>
               <Nav.Link as={Link} to='/' onClick={() => handleLogout(props)}>Logout</Nav.Link>
             </>

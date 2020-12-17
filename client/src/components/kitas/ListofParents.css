@@ -1,11 +1,13 @@
 
 li[data-gender="girl"] { 
-  background-color:#d9ffd6
-
-
+  background-color:#8af582
  }
+
  li[data-gender="boy"] { 
-  background-color:#faf8c5
- 
- 
-  }
+  background-color:#fcba03
+   }
+
+.form-horizontal {
+  display: flex; 
+  justify-content: space-around ;
+}
