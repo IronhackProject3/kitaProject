@@ -122,6 +122,53 @@ router.post("/:id/addApplication", (req, res) => {
   });
 });
 
+
+
+router.put("/:id/EditApplication", (req, res) => {
+const parentId = req.params.id;
+const childFName = req.body.childFName
+const childSName = req.body. childSName
+const dob = req.body. dob
+const boyGirl = req.body. boyGirl
+const Parent1FName = req.body. Parent1FName
+const Parent1SName = req.body. Parent1SName
+const Parent1Phone = req.body. Parent1Phone
+const Parent1Email = req.body. Parent1Email
+const ParentAddress = req.body. ParentAddress
+const ParentPostcode = req.body. ParentPostcode
+const homeLanguage = req.body. homeLanguage
+
+console.log(childFName, req.body, parentId);
+  Parent.findByIdAndUpdate(
+    parentId,
+    {
+      childFName: childFName,
+      childSName: childSName,
+      dob: dob,
+      boyGirl: boyGirl,
+      Parent1FName: Parent1FName,
+      Parent1SName: Parent1SName,
+      Parent1Phone: Parent1Phone,
+      Parent1Email: Parent1Email,
+      ParentAddress: ParentAddress,
+      ParentPostcode: ParentPostcode,
+      homeLanguage: homeLanguage
+
+ },
+    { new: true }
+  )
+  .then((result) => {
+    console.log(result, "result");
+    res.status(201).json(result);
+  })
+  .catch((err) => {
+    console.log(err);
+    res.json(err);
+  });
+
+  
+})
+
 router.put("/:id/reOrderApplications", (req, res) => {
   const parentId = req.params.id;
   const { applications } = req.body;

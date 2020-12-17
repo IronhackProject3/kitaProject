@@ -131,9 +131,11 @@ componentDidMount() {
     return (
       <div>
         <h1>List of Applicants</h1>
-        <form>
+        <form class="form-horizontal">
+         <div>
+
         <label>
-          English at home 
+          English at home &nbsp;
           <input
             name="englishAtHome"
             type="checkbox"
@@ -141,9 +143,9 @@ componentDidMount() {
             onChange={this.handleInputChange} />
         </label>
 
-
+        </div> <div>
         <label>
-          Turkish at home 
+          Turkish at home  &nbsp;
           <input
             name="englishAtHome"
             type="checkbox"
@@ -151,10 +153,10 @@ componentDidMount() {
             // onChange={this.handleInputChange} 
             />
         </label>
-
+        </div> <div>
 
         <label>
-          Russian at home 
+          Russian at home  &nbsp;
           <input
             name="englishAtHome"
             type="checkbox"
@@ -163,9 +165,9 @@ componentDidMount() {
             />
         </label>
 
-
+        </div> <div>
         <label>
-          Spanish at home 
+          Spanish at home  &nbsp;
           <input
             name="englishAtHome"
             type="checkbox"
@@ -173,15 +175,13 @@ componentDidMount() {
             // onChange={this.handleInputChange}
              />
         </label>
-
-
-
+        </div> 
 
         </form> 
 
         <ul>
          {englishFilterd.map(parent => {
-           return (<li data-gender={parent.boyGirl}>{parent.childFName},  born {parent.dob.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)},  applied  {parent.applications[0].date}  ,  {parent.homeLanguage.map(language => allLanguages[language])}  </li>)
+           return (<li data-gender={parent.boyGirl}>{parent.childFName},  born {parent.dob.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)},  applied  {parent.applications[0].date.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)}  ,  {parent.homeLanguage.map(language => allLanguages[language])}  </li>)
 
 
          })}
