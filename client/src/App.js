@@ -39,6 +39,17 @@ class App extends React.Component {
     })
   }
 
+  setUserParent = parent => {
+    if(!this.state.parent){
+      this.setState({
+        user: {
+          ...this.state.user,
+          parent: parent
+        }
+      })
+    }
+  }
+
   render() {
     return (
       <Container fluid>

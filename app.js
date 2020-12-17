@@ -11,7 +11,10 @@ const path         = require('path');
 
 
 mongoose
-  .connect('mongodb://localhost/kita-project', {useNewUrlParser: true})
+  // local connection
+  // .connect('mongodb://localhost/kita-project', {useNewUrlParser: true})
+  // heroku or local host connection
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/kita-project', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -69,13 +72,16 @@ app.use(require('node-sass-middleware')({
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-app.use(express.static(path.join(__dirname, 'public')));
+// local config
+//app.use(express.static(path.join(__dirname, 'public')));
+// Heroku config
+app.use(express.static(path.join(__dirname, "/client/build")));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Kita Finder';
 
 
 const kitas = require('./routes/kitas');
@@ -89,5 +95,10 @@ app.use('/api/auth', auth);
 
 const uploadRoutes = require('./routes/file-upload');
 app.use('/api/upload', uploadRoutes);
+
+app.use((req, res) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/client/build/index.html");
+});
 
 module.exports = app;

@@ -47,7 +47,10 @@ export default class Kitas extends Component {
 
     return (
       <>
-        <Form>
+      <div className="header">
+        <h1 className="tagline">Easily search and apply to kitas in Berlin using KitaFinder</h1>
+      </div>
+        <Form className="search-form">
           <Form.Group controlId="SearchKita">
             <Form.Control 
               type="text" 
@@ -58,21 +61,19 @@ export default class Kitas extends Component {
             />
           </Form.Group>
         </Form>
-
-        <h4>Kitas</h4>
-
-        {/* <Button variant="primary">
-          <Link to="AddKita/"> Add your Kita </Link>
-        </Button> */}
-          
+      
+      <div className="search-results">
+        <h1>Kitas</h1>
           {kitas.map(kita => (
-              <div key={kita._id}>
+              <div className="kita-names" key={kita._id}>
                 <p>
                   <Link to={`/kitas/${kita._id}`}>{kita.kitaName}</Link>,  {kita.Address},  {kita.Postcode}
                 </p>
               </div>
             )
           )}
+      </div>
+
       </>
     )
   }

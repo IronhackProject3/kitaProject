@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
-import axios from 'axios';
-import './ListofParents.css';
+import React, { Component } from "react";
+import axios from "axios";
+import "./ListofParents.css";
 export default class ListofParents extends Component {
-
 
   
   
@@ -128,6 +127,7 @@ componentDidMount() {
 
     console.log(this.state.englishAtHome)
     
+
     return (
       <div>
         <h1>List of Applicants</h1>
@@ -149,7 +149,8 @@ componentDidMount() {
 
          })}
           </ul>
+
       </div>
-    )
+    );
   }
 }
