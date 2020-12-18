@@ -65,7 +65,7 @@ export default class KitaDetails extends Component {
   render() {
     console.log(this.state.kita);
 
-    const alreadyApplied = this.state.kita ? this.props.user.parent.applications.reduce((prev, current) => {
+    const alreadyApplied = this.state.kita && this.props.user.parent ? this.props.user.parent.applications.reduce((prev, current) => {
       if (current.kitaId === this.state.kita._id.toString()) {
         return true;
       }
@@ -157,7 +157,11 @@ export default class KitaDetails extends Component {
 
             <Row className="justify-content-md-center apply-kita-button">
               <Col md="auto">
-              {!this.props.user ? (
+              {this.props.user.kita && this.props.user.type === 'kita' ? (
+              <>
+
+              </>
+            ) : !this.props.user ? (
               <>
                 <Button className="apply-button" variant="primary">
                   {/* not logged in */}

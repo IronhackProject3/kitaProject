@@ -93,12 +93,15 @@ export default class ListofParents extends Component {
     console.log(this.state.englishAtHome);
 
     return (
-      <div>
-        <h1>List of Applicants</h1>
-        <form class="form-horizontal">
+      <Container>
+        <Row className="justify-content-md-center"> 
+          <Col md="auto"><h1 className="parents-h1">List of Applicants</h1></Col>
+        </Row>
+        
+        <form className="form-horizontal">
          <div>
 
-        <label>
+        <label className="english">
           English at home &nbsp;
           <input
             name="englishAtHome"
@@ -108,7 +111,7 @@ export default class ListofParents extends Component {
         </label>
 
         </div> <div>
-        <label>
+        <label className="english">
           Turkish at home  &nbsp;
           <input
             name="englishAtHome"
@@ -119,7 +122,7 @@ export default class ListofParents extends Component {
         </label>
         </div> <div>
 
-        <label>
+        <label className="english">
           Russian at home  &nbsp;
           <input
             name="englishAtHome"
@@ -130,7 +133,7 @@ export default class ListofParents extends Component {
         </label>
 
         </div> <div>
-        <label>
+        <label className="english">
           Spanish at home  &nbsp;
           <input
             name="englishAtHome"
@@ -142,16 +145,21 @@ export default class ListofParents extends Component {
         </div> 
 
         </form> 
-
-        <ul>
+        <Row className="justify-content-md-center"> 
+          <Col md="auto">
+          <ul>
          {englishFilterd.map(parent => {
-           return (<li data-gender={parent.boyGirl}>{parent.childFName},  born {parent.dob.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)},  applied  {parent.applications[0].date.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)}  ,  {parent.homeLanguage.map(language => allLanguages[language])}  </li>)
+           return (<li className=".applicants" key={parent._id} data-gender={parent.boyGirl}>{parent.childFName},  born {parent.dob.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)},  applied  {parent.applications[0].date.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)}    {parent.homeLanguage.map(language => allLanguages[language])}  </li>)
 
 
          })}
           </ul>
 
-      </div>
+          </Col>
+        </Row>
+        
+
+      </Container>
     );
   }
 }

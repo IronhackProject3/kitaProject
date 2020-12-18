@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import './EditApplication.css';
+import { Container } from "react-bootstrap";
 
 
 export default class EditProfile extends Component {
@@ -100,9 +102,9 @@ export default class EditProfile extends Component {
   render() {
     console.log(this.props.user);
     return (
-      <div>
+      <Container>
           <>
-            <h4>Edit your profile</h4>
+            <h2 className="edit-parent">Edit your profile</h2>
 
             <Form onSubmit={this.handleSubmit}>
               <Form.Group controlId="childFName">
@@ -241,7 +243,7 @@ export default class EditProfile extends Component {
               </Button>
             </Form>
           </>
-      </div>
+      </Container>
     );
   }
 }
