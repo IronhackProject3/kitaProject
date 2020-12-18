@@ -1,12 +1,19 @@
 
 li[data-gender="girl"]::before { 
-    /* background-color:#d9ffd6; */
     content: "\2640";
  }
 
+ li[data-gender="girl"] { 
+  background-color:#d9ffd6;
+
+}
+
 li[data-gender="boy"]::before { 
-  /* background-color:#faf8c5; */
   content: "\2642";
+}
+
+li[data-gender="boy"]{ 
+  background-color:#faf8c5;
 }
 
   .parents-h1 {
@@ -33,4 +40,8 @@ input[type=checkbox] {
  .form-horizontal {
   display: flex; 
   justify-content: space-around ;
+}
+
+ul {
+  margin-top: 10px;
 }
