@@ -1,13 +1,36 @@
 
-li[data-gender="girl"] { 
-  background-color:#8af582
+li[data-gender="girl"]::before { 
+    /* background-color:#d9ffd6; */
+    content: "\2640";
  }
 
- li[data-gender="boy"] { 
-  background-color:#fcba03
-   }
+li[data-gender="boy"]::before { 
+  /* background-color:#faf8c5; */
+  content: "\2642";
+}
 
-.form-horizontal {
+  .parents-h1 {
+    font-weight: bold;
+    margin: 20px 0 20px 0;
+  }
+
+  .applicants ul, li {
+  text-decoration: none;
+  list-style-type: none;
+  padding: 15px;
+  font-size: 1.4rem;
+}
+
+.english {
+  font-size: 1.4rem;
+}
+
+input[type=checkbox] {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+ 
+ .form-horizontal {
   display: flex; 
   justify-content: space-around ;
 }

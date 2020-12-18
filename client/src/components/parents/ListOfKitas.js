@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import './ListOfKitas.css';
+import { Container, Col, Row } from "react-bootstrap";
 
 export default class ListOfKitas extends Component {
   state = {
@@ -84,45 +86,55 @@ export default class ListOfKitas extends Component {
     };
 
     return (
-      <>
-        <div class="col-md-12 text-center kitas-list">
-          <h1 className="list-h1">List of kitas I've applied</h1>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
-              {(provided, snapshot) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  style={getListStyle(snapshot.isDraggingOver)}
-                >
-                  {this.state.kitas.map((item, index) => (
-                    <Draggable
-                      key={item._id}
-                      draggableId={item._id}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={getItemStyle(
-                            snapshot.isDragging,
-                            provided.draggableProps.style
-                          )}
-                        >
-                          {item.kitaName}
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </div>
-      </>
+      <Container>
+
+        <Row className="justify-content-md-center"> 
+          <Col md="auto"><h1 className="list-h1">List of kitas I've applied</h1></Col>
+        </Row>
+
+        <Row className="justify-content-md-center"> 
+          <Col md="auto"><p>Here you should order you applications according to your priority. <br />This order will impact on the kita’s decision when allocating their available places. </p></Col>
+        </Row>
+
+        <Row className="justify-content-md-center"> 
+          <Col md="auto">
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="droppable">
+                {(provided, snapshot) => (
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    style={getListStyle(snapshot.isDraggingOver)}
+                  >
+                    {this.state.kitas.map((item, index) => (
+                      <Draggable
+                        key={item._id}
+                        draggableId={item._id}
+                        index={index}
+                      >
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
+                          >
+                            {item.kitaName}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

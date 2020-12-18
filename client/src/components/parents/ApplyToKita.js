@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
+import './ApplyToKita.css';
 
 export default class ApplyToKita extends Component {
   state = {
@@ -93,10 +95,10 @@ export default class ApplyToKita extends Component {
   render() {
     console.log(this.props.match.params.id);
     return (
-      <div>
+      <Container>
         {this.state.kita && (
           <>
-            {this.state.kita.kitaName ? (<h4>Apply to {this.state.kita.kitaName}</h4>) : (<h4>Create Application</h4>)}
+            {this.state.kita.kitaName ? (<h2 className="h2-apply-kita">Apply to {this.state.kita.kitaName}</h2>) : (<h2 className="h2-apply-kita">Create Application</h2>)}
 
             <Form onSubmit={this.handleSubmit}>
               <Form.Group controlId="childFName">
@@ -237,7 +239,7 @@ export default class ApplyToKita extends Component {
             </Form>
           </>
         )}
-      </div>
+      </Container>
     );
   }
 }

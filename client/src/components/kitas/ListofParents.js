@@ -1,140 +1,107 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./ListofParents.css";
-export default class ListofParents extends Component {
+import { Container, Col, Row } from "react-bootstrap";
 
-  
-  
-  
+export default class ListofParents extends Component {
   state = {
     parentsList: [],
-    englishAtHome: false
-    
-  }
-  
-    handleInputChange = (event) => { 
-      console.log(event.target)
-      const target = event.target;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
-  console.log(value)
-      this.setState({
-        englishAtHome: value
-      });
-    }
+    englishAtHome: false,
+  };
 
-getData = () => {
-  axios.get("/api/parent").then(response => {
-    // console.log(response.data)
-    //here goes filtering wit the userId in props
-
-    const obj = response.data.map( element => {
-      return {...element, applications: element.applications.filter(applicant => {
-        // console.log(applicant) 
-      
-        return  applicant.kitaId === this.props.user.kita._id })}  // true if the ids match  - filter further by adding conditions 
-    })
-    const filteredApplication = obj.filter(applicant => applicant.applications.length > 0) //filtering by populated or not
-    
-    
-  //   if ( this.state.englishAtHome == true){
-  //     console.log('getting here')
-  // filteredApplication = filteredApplication.filter((applicant) => {if (applicant.applications.includes('en')) {return applicant} }) //filtering by english language in there or not
-  
-  //    }
-
-  //   const sortedAndFiltered  =  filteredApplication.fromEntries(
-    //     filteredApplication.entries(filteredApplication.childFName).sort(([,a],[,b]) => a-b));
-    //  // setState of parentsList
-    
-    
-    const sortedByDate = filteredApplication.sort(function(a,b){
-      // Turn your strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
-      // following line sorts by application date
-      return new Date(a.applications[0].date) - new Date(b.applications[0].date);
-      
-      // following three lines sort by CFName
-      // if(a.childFName < b.childFName) { return 1; }
-      // if(a.childFName > b.childFName) { return -1; }
-      // return 0;
-      
-      
-      // 
-      // return a.childFName < b.childFName;
-      // a and b represent each object in the array that we iterate over.
+  handleInputChange = (event) => {
+    console.log(event.target);
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    console.log(value);
+    this.setState({
+      englishAtHome: value,
     });
-    console.log('sortedAndFiltered ',  sortedByDate)
-    
+  };
 
-    
-    
-    
-    
-    this.setState({ // puts the filtered set of data into the state
-      
-      // console.log('parent.applications.date', parent.applications.date)
-      
-      parentsList: sortedByDate //sortedAndFiltered
-    })
-  }).catch(error => {
-    console.log(error)
-  })
-}
+  getData = () => {
+    axios
+      .get("/api/parent")
+      .then((response) => {
+        // console.log(response.data)
+        //here goes filtering wit the userId in props
 
-componentDidMount() {
-  this.getData()
-}
+        const obj = response.data.map((element) => {
+          return {
+            ...element,
+            applications: element.applications.filter((applicant) => {
+              // console.log(applicant)
+              return applicant.kitaId === this.props.user.kita._id;
+            }),
+          }; // true if the ids match  - filter further by adding conditions
+        });
+        const filteredApplication = obj.filter(
+          (applicant) => applicant.applications.length > 0
+        ); //filtering by populated or not
 
+        const sortedByDate = filteredApplication.sort(function (a, b) {
+          return (
+            new Date(a.applications[0].date) - new Date(b.applications[0].date)
+          );
+        });
+        console.log("sortedAndFiltered ", sortedByDate);
 
+        this.setState({
+          parentsList: sortedByDate, //sortedAndFiltered
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-    
-    
-  englishCheck = ()=>  {
+  componentDidMount() {
+    this.getData();
+  }
 
-}
-  
-
-
-
+  englishCheck = () => {};
 
   render() {
-    this.englishCheck()
-  const  allLanguages = {
-      de: 'German ',
-      en: 'English ',
-      Turkish: 'tr',
-      ru: 'Russian ',
-      Spanish: 'es',
-      French: 'fr',
-      Arabic: 'ar',
-      Polish: 'pl',
-      Italian: 'it',
-      Kurdish: 'ku', 
-      Greek: 'el',
-      Portugese: 'pt',
-      Dutch: 'nl',
-      SignLanguage: 'Sign Language',
-      Other: 'other'
+    this.englishCheck();
+    const allLanguages = {
+      de: "German ",
+      en: "English ",
+      Turkish: "tr",
+      ru: "Russian ",
+      Spanish: "es",
+      French: "fr",
+      Arabic: "ar",
+      Polish: "pl",
+      Italian: "it",
+      Kurdish: "ku",
+      Greek: "el",
+      Portugese: "pt",
+      Dutch: "nl",
+      SignLanguage: "Sign Language",
+      Other: "other",
+    };
+
+    let englishFilterd = this.state.parentsList;
+    if (this.state.englishAtHome) {
+      englishFilterd = this.state.parentsList.filter((applicant) => {
+        if (applicant.homeLanguage.includes("en")) {
+          return applicant;
+        }
+      }); //filtering by english language in there or not
     }
 
-    let englishFilterd =this.state.parentsList
-    if ( this.state.englishAtHome){
-       englishFilterd = this.state.parentsList.filter((applicant) =>
-        {  if (applicant.homeLanguage.includes('en')) {return applicant} }) //filtering by english language in there or not
-     }
-
-
-
-    console.log(this.state.englishAtHome)
-    
+    console.log(this.state.englishAtHome);
 
     return (
-      <div>
-        <h1>List of Applicants</h1>
-        <form class="form-horizontal">
+      <Container>
+        <Row className="justify-content-md-center"> 
+          <Col md="auto"><h1 className="parents-h1">List of Applicants</h1></Col>
+        </Row>
+        
+        <form className="form-horizontal">
          <div>
 
-        <label>
+        <label className="english">
           English at home &nbsp;
           <input
             name="englishAtHome"
@@ -144,7 +111,7 @@ componentDidMount() {
         </label>
 
         </div> <div>
-        <label>
+        <label className="english">
           Turkish at home  &nbsp;
           <input
             name="englishAtHome"
@@ -155,7 +122,7 @@ componentDidMount() {
         </label>
         </div> <div>
 
-        <label>
+        <label className="english">
           Russian at home  &nbsp;
           <input
             name="englishAtHome"
@@ -166,7 +133,7 @@ componentDidMount() {
         </label>
 
         </div> <div>
-        <label>
+        <label className="english">
           Spanish at home  &nbsp;
           <input
             name="englishAtHome"
@@ -178,16 +145,21 @@ componentDidMount() {
         </div> 
 
         </form> 
-
-        <ul>
+        <Row className="justify-content-md-center"> 
+          <Col md="auto">
+          <ul>
          {englishFilterd.map(parent => {
-           return (<li data-gender={parent.boyGirl}>{parent.childFName},  born {parent.dob.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)},  applied  {parent.applications[0].date.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)}  ,  {parent.homeLanguage.map(language => allLanguages[language])}  </li>)
+           return (<li className=".applicants" key={parent._id} data-gender={parent.boyGirl}>{parent.childFName},  born {parent.dob.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)},  applied  {parent.applications[0].date.split("T")[0].split("-").reduce((t,v) => t = v + "." + t)}    {parent.homeLanguage.map(language => allLanguages[language])}  </li>)
 
 
          })}
           </ul>
 
-      </div>
+          </Col>
+        </Row>
+        
+
+      </Container>
     );
   }
 }

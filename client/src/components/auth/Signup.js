@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Form, Button, Alert } from 'react-bootstrap';
 import { signup } from '../../services/auth';
 import { Link } from "react-router-dom";
+import './Signup.css';
+import { Container } from "react-bootstrap";
 
 export default class Signup extends Component {
 
@@ -42,8 +44,8 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <>
-        <h2>Signup</h2>
+      <Container>
+        <h2 className="signup">Signup</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
             <Form.Label htmlFor='username'>Username: </Form.Label>
@@ -87,7 +89,7 @@ export default class Signup extends Component {
           <Button type='submit'>Signup</Button>
         </Form>
         <p>Already have an account? <Link to={`/login`}>Login</Link></p>
-      </>
+      </Container>
     )
   }
 }

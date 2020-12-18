@@ -20,7 +20,7 @@ export default function Navbar(props) {
     <Bootnav collapseOnSelect expand="sm" bg='primary'>
       <Bootnav.Brand>
         {/* <Logo alt="" width="30" height="30" className="d-inline-block align-top" /> */}
-        <Link to='/'>Home</Link>
+        <Link to='/'><strong>KitaFinder</strong></Link>
       </Bootnav.Brand>
       
       <Bootnav.Toggle aria-controls="responsive-navbar-nav" />

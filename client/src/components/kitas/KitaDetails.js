@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./KitaDetails.css";
+import { Container, Row, Col } from "react-bootstrap";
 
 export default class KitaDetails extends Component {
   state = {
@@ -34,17 +35,17 @@ export default class KitaDetails extends Component {
 
   oneClickApplyToKita = () => {
     const kitaId = this.props.match.params.id;
-
+    const newApplication = {
+      kitaId: kitaId,
+      kitaPriority: 0,
+      parentPriority: 0,
+      date: new Date().toString(),
+    }
     axios
-      .post(`/api/parent/${this.props.user.parent._id}/addApplication`, {
-        kitaId: kitaId,
-        kitaPriority: 0,
-        parentPriority: 0,
-        date: new Date().toString(),
-      })
+      .post(`/api/parent/${this.props.user.parent._id}/addApplication`, newApplication)
       .then((response) => {
         console.log(response);
-        this.props.setUserParentApplication(response);
+        this.props.setUserParent(response.data);
         this.props.history.push(`/`);
       });
   };
@@ -63,14 +64,27 @@ export default class KitaDetails extends Component {
 
   render() {
     console.log(this.state.kita);
+
+    const alreadyApplied = this.state.kita && this.props.user.parent ? this.props.user.parent.applications.reduce((prev, current) => {
+      if (current.kitaId === this.state.kita._id.toString()) {
+        return true;
+      }
+      return prev;
+    }, false) : false;
+    //const alreadyApplied = false;
+
     return (
-      <>
+      <Container>
         {this.state.kita && (
           <>
-            <h1 className="h1-details">{this.state.kita.kitaName}</h1>
+            <Row>
+              <Col>
+                <h1 className="h1-details">{this.state.kita.kitaName}</h1>
+              </Col>
+            </Row>
 
-            <div className="details-wrapper">
-              <div className="left-div">
+            <Row>
+              <Col>
                 <img
                   style={{ width: "400px" }}
                   src={this.state.imageURL}
@@ -78,6 +92,37 @@ export default class KitaDetails extends Component {
                 />
                 <br />
                 <br />
+              </Col>
+              <Col>
+                <h2 className="details-h2">General Information:</h2>
+                <p className="p-details">
+                  <strong>Languages: </strong>
+                  {this.state.kita.emailAddress}
+                </p>
+                <p className="p-details">
+                  <strong>Total number of Places: </strong>
+                  {this.state.kita.totalPlaces}
+                </p>
+                <p className="p-details">
+                  <strong>Available Places: </strong>
+                  {this.state.kita.freePlaces}
+                </p>
+                <p className="p-details">
+                  <strong>Open Time: </strong>
+                  {this.state.kita.openTime}&nbsp;&nbsp;
+                  <strong>Close Time: </strong>
+                  {this.state.kita.closeTime}
+                </p>
+                <p className="p-details">
+                  <strong>Min Age: </strong>
+                  {this.state.kita.minAge}&nbsp;&nbsp;
+                  <strong>Max Age: </strong>
+                  {this.state.kita.maxAge}
+                </p>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
                 <iframe
                   title="kitamap"
                   width="400"
@@ -85,65 +130,38 @@ export default class KitaDetails extends Component {
                   frameBorder="0"
                   src={`https://www.google.com/maps?q=${this.state.kita.Address}&output=embed`}
                 ></iframe>
-              </div>
-
-              <div className="right-div">
-                <div className="general-info">
-                <h2 className="details-h2">General Information:</h2>
-                    <p>
-                        <strong>Languages: </strong>
-                        {this.state.kita.emailAddress}
-                      </p>
-                      <p>
-                        <strong>Total number of Places: </strong>
-                        {this.state.kita.totalPlaces}
-                      </p>
-                      <p>
-                        <strong>Available Places: </strong>
-                        {this.state.kita.freePlaces}
-                      </p>
-                      <p>
-                        <strong>Open Time: </strong>
-                        {this.state.kita.openTime}&nbsp;&nbsp;
-                        <strong>Close Time: </strong>
-                        {this.state.kita.closeTime}
-                      </p>
-                      <p>
-                        <strong>Min Age: </strong>
-                        {this.state.kita.minAge}&nbsp;&nbsp;
-                        <strong>Max Age: </strong>
-                        {this.state.kita.maxAge}
-                      </p>
-                </div>
-                  
-                <div className="contact-info">
+              </Col>
+              <Col>
                 <h2 className="details-h2">Contact:</h2>
-                <p>
+                <p className="p-details">
                   <strong>Address: </strong>
                   {this.state.kita.Address}
                 </p>
-                <p>
+                <p className="p-details">
                   <strong>Postcode: </strong>
                   {this.state.kita.Postcode}
                 </p>
-                <p>
+                <p className="p-details">
                   <strong>Telephone: </strong>
                   {this.state.kita.Telephone}
                 </p>
-                <p>
+                <p className="p-details">
                   <strong>Email: </strong>
                   <a href={"mailto:" + this.state.kita.emailAddress}>
                     {this.state.kita.emailAddress}
                   </a>
                 </p>
-                </div>
-                
-                
-              </div>
-            </div>
-            <div class="col-md-12 text-center">
+              </Col>
+            </Row>
 
-            {!this.props.user ? (
+
+            <Row className="justify-content-md-center apply-kita-button">
+              <Col md="auto">
+              {this.props.user.kita && this.props.user.type === 'kita' ? (
+              <>
+
+              </>
+            ) : !this.props.user ? (
               <>
                 <Button className="apply-button" variant="primary">
                   {/* not logged in */}
@@ -163,7 +181,7 @@ export default class KitaDetails extends Component {
                   </Link>
                 </Button>
               </>
-            ) : this.props.user.parent ? (
+            ) : this.props.user.parent && !alreadyApplied ? (
               <>
                 <Button variant="primary" onClick={this.oneClickApplyToKita}>
                   {/* display if userid corrsponds to parent and DOES NOT exist in the parents table and kitaId is not in the parent applications array*/}
@@ -173,7 +191,8 @@ export default class KitaDetails extends Component {
               </>
             ) : this.props.user &&
               this.props.user.type === "parent" &&
-              this.props.user.parent ? (
+              this.props.user.parent &&
+              !alreadyApplied ? (
               <>
                 <Button variant="primary">
                   {/* display if userid corrsponds to parent and DOES exist in the parents table and kitaId is not in the parent applications array */}
@@ -184,14 +203,18 @@ export default class KitaDetails extends Component {
                 </Button>
               </>
             ) : (
-              <></>
+              <p className="already-applied">You have already applied for this kita</p>
             )}
-              
-            </div>
+              </Col>
+            </Row>
+
+
+
+
             
           </>
         )}
-      </>
+      </Container>
     );
   }
 }

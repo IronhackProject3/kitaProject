@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import service from "../../services/upload";
+import './EditKita.css';
+import { Container } from "react-bootstrap";
 
 export default class EditKita extends Component {
   
@@ -129,7 +131,7 @@ export default class EditKita extends Component {
   
   render() {
     return (
-      <div>
+      <Container>
         <h2>Edit Kita details</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="kitaName">
@@ -337,7 +339,7 @@ export default class EditKita extends Component {
             Update Kita details
           </Button>
         </Form>
-      </div>
+      </Container>
     )
   }
 }
