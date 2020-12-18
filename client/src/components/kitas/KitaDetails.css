@@ -21,7 +21,7 @@ iframe {
 
 .details-h2 {
   font-weight: bold;
-  font-size: 1.rem;
+  font-size: 1.8rem !important;
 }
 
 .p-details {
