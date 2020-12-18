@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Form, Button } from 'react-bootstrap';
 import './AddKita.css';
 import service from "../../services/upload";
+import { Container, Col, Row } from "react-bootstrap";
 
 export default class AddKita extends Component {
 
@@ -112,8 +113,8 @@ export default class AddKita extends Component {
   render() {
     
     return (
-      <>
-        <h4>Add your Kita</h4>
+      <Container>
+        <h2 className="h2-add-kita">Add your Kita</h2>
 
         <Form onSubmit={this.handleSubmit} >
           <Form.Group controlId="kitaName">
@@ -320,7 +321,7 @@ export default class AddKita extends Component {
             Submit
           </Button>
         </Form>
-      </>
+      </Container>
     )
   }
 }
