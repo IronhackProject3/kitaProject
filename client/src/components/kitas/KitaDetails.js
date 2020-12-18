@@ -159,7 +159,12 @@ export default class KitaDetails extends Component {
               <Col md="auto">
               {this.props.user.kita && this.props.user.type === 'kita' ? (
               <>
-
+              <Button variant="primary">
+                  <Link to={`/kitas/${this.state.kita._id}/edit`}>
+                    {" "}
+                    Edit kita
+                  </Link>
+                </Button>
               </>
             ) : !this.props.user ? (
               <>
